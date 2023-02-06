@@ -1,8 +1,13 @@
+// import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
+import PageInscription from '../pages/PageInscription';
+
 const Navbar = () => {
   return (
     <div>
       <nav className='navbar navbar-expand-lg bg-body-tertiary'>
         <div className='container-fluid'>
+          {/* Placement du logo de Archerire faisant partie intégrante de la navbar */}
           <a className='navbar-brand' href='#'>
             <img
               src='/Assets/Imagelogo/logo.png'
@@ -26,19 +31,19 @@ const Navbar = () => {
           <div className='collapse navbar-collapse' id='navbarNavDropdown'>
             <ul className='navbar-nav'>
               <li className='nav-item'>
-                <a className='nav-link active' aria-current='page' href='#'>
+                <NavLink to='/' end className='nav-link'>
                   Home
-                </a>
+                </NavLink>
               </li>
               <li className='nav-item'>
-                <a className='nav-link' href='#'>
+                <NavLink to='/pageInscription' end className='nav-link'>
                   Inscription
-                </a>
+                </NavLink>
               </li>
               <li className='nav-item'>
-                <a className='nav-link' href='#'>
+                <NavLink to='/pageConnexion' end className='nav-link'>
                   Connexion
-                </a>
+                </NavLink>
               </li>
               <li className='nav-item dropdown'>
                 <a
@@ -48,12 +53,17 @@ const Navbar = () => {
                   data-bs-toggle='dropdown'
                   aria-expanded='false'
                 >
-                  What else ?
+                  😄
                 </a>
                 <ul className='dropdown-menu'>
                   <li>
                     <a className='dropdown-item' href='#'>
-                      What do we offer you?
+                      What else ?
+                    </a>
+                  </li>
+                  <li>
+                    <a className='dropdown-item' href='#'>
+                      What do we offer you ?
                     </a>
                   </li>
                   <li>

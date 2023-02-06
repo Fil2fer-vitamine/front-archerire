@@ -1,8 +1,8 @@
 const PageInscription = () => {
     return (
-        <div>
-
-        </div>
+      <div>
+        <h1>Page Inscription</h1>
+    </div>
     );
 };
 

@@ -8,7 +8,7 @@ const Footer = () => {
         className='flex-shrink-0 py-4 bg-white text-black-50'
       >
         <div className='container text-center'>
-          <small>Copyright &copy; Your Website</small>
+          <small>Copyright &copy; Our Website for you</small>
           <a className='navbar-brand' href='#'>
             <img
               src='/Assets/Imagelogo/logo.png'
