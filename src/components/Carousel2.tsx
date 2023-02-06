@@ -1,3 +1,5 @@
+import './Carousel2.css';
+
 const Carousel2 = () => {
   return (
     <div className='w-50 bg-info'>
