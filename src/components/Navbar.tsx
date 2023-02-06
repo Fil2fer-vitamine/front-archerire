@@ -57,24 +57,24 @@ const Navbar = () => {
                 </a>
                 <ul className='dropdown-menu'>
                   <li>
-                    <a className='dropdown-item' href='#'>
+                    <NavLink to='/pageInformations' end className='nav-link'>
                       What else ?
-                    </a>
+                    </NavLink>
                   </li>
                   <li>
-                    <a className='dropdown-item' href='#'>
+                    <NavLink to='/pageInformations' end className='nav-link'>
                       What do we offer you ?
-                    </a>
+                    </NavLink>
                   </li>
                   <li>
-                    <a className='dropdown-item' href='#'>
-                      What is archery battle?
-                    </a>
+                    <NavLink to='/pageInformations' end className='nav-link'>
+                      What is archery battle ?
+                    </NavLink>
                   </li>
                   <li>
-                    <a className='dropdown-item' href='#'>
+                    <NavLink to='/pageInformations' end className='nav-link'>
                       Our news ...
-                    </a>
+                    </NavLink>
                   </li>
                 </ul>
               </li>
