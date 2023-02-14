@@ -21,13 +21,15 @@ function Agenda() {
   );
 
   return (
-    <DayPicker
-      mode='single'
-      selected={selectedDay}
-      onSelect={setSelectedDay}
-      footer={footer}
-      locale={fr}
-    />
+    <div className="centrage">
+      <DayPicker
+        mode='single'
+        selected={selectedDay}
+        onSelect={setSelectedDay}
+        footer={footer}
+        locale={fr}
+      />
+    </div>
   );
 }
 
