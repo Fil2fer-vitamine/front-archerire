@@ -10,6 +10,7 @@ const Navbar = () => {
               width='80'
               height='80'
               className='LogoNavbar'
+              title='Coucou &#128521;'
             />
           </a>
           <button
@@ -27,17 +28,17 @@ const Navbar = () => {
             <ul className='navbar-nav'>
               <li className='nav-item'>
                 <a className='nav-link active' aria-current='page' href='#'>
-                  Home
+                  Accueil
                 </a>
               </li>
               <li className='nav-item'>
                 <a className='nav-link' href='#'>
-                  Features
+                  Notre Actualité
                 </a>
               </li>
               <li className='nav-item'>
                 <a className='nav-link' href='#'>
-                  Pricing
+                  Que proposons-nous ?
                 </a>
               </li>
               <li className='nav-item dropdown'>
@@ -48,22 +49,22 @@ const Navbar = () => {
                   data-bs-toggle='dropdown'
                   aria-expanded='false'
                 >
-                  Dropdown link
+                  Pour plus d'action sur notre Site Web
                 </a>
                 <ul className='dropdown-menu'>
                   <li>
                     <a className='dropdown-item' href='#'>
-                      Action
+                      Inscription
                     </a>
                   </li>
                   <li>
                     <a className='dropdown-item' href='#'>
-                      Another action
+                      Connexion
                     </a>
                   </li>
                   <li>
                     <a className='dropdown-item' href='#'>
-                      Something else here
+                      Nous contacter
                     </a>
                   </li>
                   <li></li>
@@ -78,6 +79,7 @@ const Navbar = () => {
               width='80'
               height='80'
               className='LogoNavbar'
+              title='Bienvenue sur notre Site Web'
             />
           </a>
         </div>

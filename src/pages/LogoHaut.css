@@ -1,0 +1,6 @@
+/* Ce composant gère le logo du Haut à gauche */
+
+.logoHaut {             /* Mise du logo en haut à gauche - lecture en Z */
+  width: 200px;
+  position: fixed;
+}

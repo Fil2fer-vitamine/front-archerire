@@ -1,0 +1,16 @@
+.centrageBouton {
+    margin: 10px;
+  display: flex;
+  justify-content: space-around;    /* Mise des boutons espacée */
+}
+
+.outline-warning {
+background-color: red;
+}
+
+.photos {
+
+}
+.reservation {
+
+}

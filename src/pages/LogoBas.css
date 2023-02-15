@@ -1,0 +1,6 @@
+/* Ce composant gère le logo du Bas à droite */
+.logoBas {
+  width: 200px;
+  float: right;     /* Mise du logo en bas à droite - lecture en Z */
+  margin: 5px 0 20px 20px;
+}

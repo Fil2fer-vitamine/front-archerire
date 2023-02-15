@@ -21,7 +21,7 @@ function Agenda() {
   );
 
   return (
-    <div className="centrage">
+    <div className='centrage'>
       <DayPicker
         mode='single'
         selected={selectedDay}
