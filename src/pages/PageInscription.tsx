@@ -1,4 +1,3 @@
-import Agenda from '../components/Agenda';
 import 'react-day-picker/dist/style.css';
 import Navbar from '../components/Navbar';
 
