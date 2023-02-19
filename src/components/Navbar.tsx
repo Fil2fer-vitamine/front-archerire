@@ -13,6 +13,7 @@ const Navbar = () => {
               title='Coucou &#128521;'
             />
           </a>
+          {/* les icones sont présents sur https://outils-javascript.aliasdmc.fr/encodage-icone-symbole/encode-caractere-26A0-html-css-js-autre.html */}
           <button
             className='navbar-toggler'
             type='button'
@@ -27,17 +28,17 @@ const Navbar = () => {
           <div className='collapse navbar-collapse' id='navbarNavDropdown'>
             <ul className='navbar-nav'>
               <li className='nav-item'>
-                <a className='nav-link active' aria-current='page' href='#'>
+                <a className='nav-link active' aria-current='page' href='/'>
                   Accueil
                 </a>
               </li>
               <li className='nav-item'>
-                <a className='nav-link' href='#'>
+                <a className='nav-link' href='/pageActualites'>
                   Notre Actualité
                 </a>
               </li>
               <li className='nav-item'>
-                <a className='nav-link' href='#'>
+                <a className='nav-link' href='PageInformations'>
                   Que proposons-nous ?
                 </a>
               </li>
@@ -49,25 +50,31 @@ const Navbar = () => {
                   data-bs-toggle='dropdown'
                   aria-expanded='false'
                 >
-                  Pour plus d'action sur notre Site Web
+                  &#9660; Pour plus d'actions sur notre Site Web &#9660;
                 </a>
                 <ul className='dropdown-menu'>
                   <li>
-                    <a className='dropdown-item' href='#'>
+                    <a className='dropdown-item' href='PageInscription'>
                       Inscription
                     </a>
                   </li>
                   <li>
-                    <a className='dropdown-item' href='#'>
+                    <a className='dropdown-item' href='PageConnexion'>
                       Connexion
                     </a>
                   </li>
                   <li>
-                    <a className='dropdown-item' href='#'>
-                      Nous contacter
+                    <a className='dropdown-item' href='PageContact'>
+                      &#9888; Nous contacter
                     </a>
                   </li>
-                  <li></li>
+                  <li>
+                    <a className='dropdown-item' href='PageReservation'>
+                      <strong>&#128486;</strong>{' '}
+                      <em>... Faisons une réservation ...</em>
+                      <strong> &#128487;</strong>
+                    </a>
+                  </li>
                 </ul>
               </li>
             </ul>
