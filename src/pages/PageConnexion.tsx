@@ -42,7 +42,8 @@ const Connexion = () => {
         console.log(response.data.accessToken);
         // stock "set" le token
         localStorage.setItem("token", token);
-        navigate("/Reservations");
+        navigate("/");
+        // La navigation ramènera sur la page Home avec l'User identifié : le bonjour sera personnalisé.
       })
       .catch((err) => {
         console.error(err);
