@@ -16,9 +16,42 @@ const PageInscription = () => {
 
   const handleSubmitForm = (e: FormEvent) => {
     e.preventDefault();
-    console.log('button form clicked', handleSubmitForm);
-    console.log(emailElement.current?.value);
-    console.log(passwordElement.current?.value);
+    console.log('---Bouton formulaire - Clic effectif---', handleSubmitForm);
+    console.log(
+      '---emailElement.current?.value--- -->',
+      emailElement.current?.value
+    );
+    console.log(
+      '---passwordElement.current?.value--- -->',
+      passwordElement.current?.value
+    );
+
+    // Gestion des erreurs de saisies que pourrait faire l'utilisateur avnt d'entrer dans l'axios : tous les champs sont obligatoires.
+    if (nameElement.current?.value === '') {
+      return 'Tous les champs doivent être remplis';
+    }
+    if (firstnameElement.current?.value === '') {
+      return 'Tous les champs doivent être remplis ';
+    }
+    if (adressElement.current?.value === '') {
+      return 'Tous les champs doivent être remplis';
+    }
+    if (postal_codeElement.current?.value === '') {
+      return 'Tous les champs doivent être remplis ';
+    }
+    if (cityElement.current?.value === '') {
+      return 'Tous les champs doivent être remplis';
+    }
+    if (phoneElement.current?.value === '') {
+      return 'Tous les champs doivent être remplis ';
+    }
+
+    if (emailElement.current?.value === '') {
+      return 'Tous les champs doivent être remplis';
+    }
+    if (passwordElement.current?.value === '') {
+      return 'Tous les champs doivent être remplis ';
+    }
 
     axios
       .post(`http://localhost:8080/api/auth/register`, {
@@ -202,7 +235,10 @@ const PageInscription = () => {
 
               <div>
                 <BoutonAnnuler />{' '}
-                <button type='button' className='btn btn-outline-success btn-lg'>
+                <button
+                  type='button'
+                  className='btn btn-outline-success btn-lg'
+                >
                   Valider
                 </button>
               </div>

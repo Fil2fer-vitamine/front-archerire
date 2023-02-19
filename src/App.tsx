@@ -21,7 +21,7 @@ function App() {
         <Routes>
           <Route path='/' element={<PageHome />} />
           <Route path='/Inscription' element={<PageInscription />} />
-          <Route path='/Connexion' element={<PageConnexion />} />
+          <Route path='/PageConnexion' element={<PageConnexion />} />
           <Route path='/Informations' element={<PageInformations />} />
           <Route path='/Photo' element={<PagePhoto />} />
           <Route
