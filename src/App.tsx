@@ -19,10 +19,11 @@ function App() {
         <LogoHaut />
         <Navbar />
         <Routes>
+          {/* Où qu'on aille, ... on aura le composant navbar */}
           <Route path='/' element={<PageHome />} />
-          <Route path='/Inscription' element={<PageInscription />} />
+          <Route path='/PageInscription' element={<PageInscription />} />
           <Route path='/PageConnexion' element={<PageConnexion />} />
-          <Route path='/Informations' element={<PageInformations />} />
+          <Route path='/PageInformations' element={<PageInformations />} />
           <Route path='/Photo' element={<PagePhoto />} />
           <Route
             path='/PageListeReservations'
