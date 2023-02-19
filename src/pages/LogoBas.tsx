@@ -1,4 +1,4 @@
-import "./LogoBas.css"
+import './LogoBas.css';
 
 const LogoDroit = () => {
   return (
@@ -8,6 +8,7 @@ const LogoDroit = () => {
           className='logoBas'
           src='/Assets/Imagelogo/logo.png'
           alt='Logo Archerire'
+          title="N'hesitez pas à réserver..."
         />
       </div>
     </div>

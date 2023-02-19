@@ -65,7 +65,7 @@ const Navbar = () => {
                   </li>
                   <li>
                     <a className='dropdown-item' href='PageContact'>
-                      &#9888; Nous contacter
+                      &#9888; Nous contacter &#9743; &#9993;
                     </a>
                   </li>
                   <li>

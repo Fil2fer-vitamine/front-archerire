@@ -8,6 +8,7 @@ const LogoHaut = () => {
           className='logoHaut'
           src='/Assets/Imagelogo/logo.png'
           alt='Logo Archerire'
+          title="N'hesitez pas à vous renseigner..."
         />
       </div>
     </div>
