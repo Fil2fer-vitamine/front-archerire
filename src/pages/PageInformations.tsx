@@ -55,7 +55,7 @@ const PageInformations = () => {
                 </strong>
               </NavLink>
               Nous avons la possibilité de nous rendre sur les lieux dans un
-              rayon d'une vingtaine de kilomètres.
+              rayon d'une trentaine de kilomètres.<br></br>
               <code>
                 Cependant, toutes demandes et toutes distances seront étudiées :
                 une réponse est donnée à chacune des sollicitations.
@@ -161,7 +161,9 @@ const PageInformations = () => {
               Vous pouvez tenter une stratégie avec vos coéquipiers ou décider
               de vous la <code>jouer en solo</code> pour tenter de devenir, à la
               fin de la partie, un des plus dignes héritiers de Messire Robin
-              des bois !!!
+              des bois !!!<br></br>
+              Parfois, des tournois sont organisés lorsque plusieurs équipes
+              sont constituées : là, le jeu prend une toute autre dimension ...
             </div>
           </div>
         </div>
