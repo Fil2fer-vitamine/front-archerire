@@ -54,7 +54,7 @@ const PageInscription = () => {
     }
 
     axios
-      // récupération des données pour un enregistrement
+      // récupération de la saisie des données pour un enregistrement
       .post(`http://localhost:8080/api/auth/register`, {
         name: nameElement.current?.value,
         firstname: firstnameElement.current?.value,

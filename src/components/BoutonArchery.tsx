@@ -19,7 +19,9 @@ function OutlineTypesExample() {
         size='lg'
         title="N'hésitez pas à réserver !!!"
       >
-        Pour réserver, cliquez ici !
+        <NavLink to='/PageReservation' end className='nav-link'>
+          Vous souhaitez réserver ???
+        </NavLink>
       </Button>
     </div>
   );
