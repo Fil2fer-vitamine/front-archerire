@@ -46,7 +46,7 @@ const PageReservation = () => {
                   Annuler
                 </button>
                 <button type='button' className='btn btn-success'>
-                  Enregirtrer cette réservation
+                  Enregistrer cette réservation
                 </button>
               </div>
             </div>
