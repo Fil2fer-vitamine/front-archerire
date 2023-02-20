@@ -54,6 +54,7 @@ const PageInscription = () => {
     }
 
     axios
+      // récupération des données pour un enregistrement
       .post(`http://localhost:8080/api/auth/register`, {
         name: nameElement.current?.value,
         firstname: firstnameElement.current?.value,
@@ -238,6 +239,7 @@ const PageInscription = () => {
                 <button
                   type='button'
                   className='btn btn-outline-success btn-lg'
+                  onClick={handleSubmitForm}
                 >
                   Valider
                 </button>
