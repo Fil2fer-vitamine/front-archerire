@@ -61,7 +61,7 @@ const PageInscription = () => {
         postal_code: postal_codeElement.current?.value,
         city: cityElement.current?.value,
         phone: phoneElement.current?.value,
-        mail: emailElement.current?.value,
+        email: emailElement.current?.value,
         password: passwordElement.current?.value,
       })
       .then((response) => {
@@ -187,7 +187,7 @@ const PageInscription = () => {
               <input
                 type='text'
                 className='form-control'
-                placeholder='ex :     Fresnoy-En-Thelle'
+                placeholder='ex :     0612345678'
                 aria-label="Recipient's userphone"
                 aria-describedby='basic-addon2'
                 ref={phoneElement}
