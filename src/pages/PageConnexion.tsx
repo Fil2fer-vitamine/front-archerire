@@ -61,8 +61,7 @@ const Connexion = () => {
               <div className='input-group mb-3'>
                 <span className='input-group-text' id='basic-addon2'>
                   <pre>
-                    Quelle est votre <strong>adresse e.mail</strong>, s'il vous
-                    plait :
+                    Quelle est votre <strong>adresse e.mail</strong> ?
                   </pre>
                 </span>
                 <input
@@ -78,8 +77,7 @@ const Connexion = () => {
               <div className='input-group mb-3'>
                 <span className='input-group-text' id='basic-addon2'>
                   <pre>
-                    Quel sera votre <strong>mot de passe</strong> pour ce site,
-                    s'il vous plait :
+                    Quel est votre <strong>mot de passe</strong> ?
                   </pre>
                 </span>
                 <input
