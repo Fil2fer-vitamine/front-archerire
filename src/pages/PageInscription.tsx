@@ -182,7 +182,7 @@ const PageInscription = () => {
                 </pre>
               </span>
               <input
-                type='text'
+                type='tel'
                 className='form-control'
                 placeholder='ex :     0612345678'
                 aria-label="Recipient's userphone"

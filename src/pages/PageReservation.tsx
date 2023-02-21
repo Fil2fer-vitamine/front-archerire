@@ -50,20 +50,41 @@ const PageReservation = () => {
                     id='exampleFormControlInput1'
                     placeholder='ex : ANDRE-DE-LA-TOUR'
                   />
-                  <label
-                    htmlFor='exampleFormControlInput1'
-                    className='form-label'
-                  >
-                    role :
-                  </label>
-                  <input
-                    type='text'
-                    className='form-control'
-                    id='exampleFormControlInput2'
-                    placeholder='ex : particulier, société, association ou autre'
-                  />
+                  <div className='form-group'>
+                    <label htmlFor='selection'></label>
+                    <select id='selection' className='form-control'>
+                      <option value=''>
+                        La demande est-elle faite pour ...
+                      </option>
+                      <optgroup label='... vous même ?'>
+                        <option value=''>un particulier.</option>
+                      </optgroup>
+                      <optgroup label='... une entité ?'>
+                        <option value=''>une entreprise.</option>
+                        <option value=''>une association.</option>
+                        <option value=''>une communauté.</option>
+                      </optgroup>
+                    </select>
+                  </div>
+                  <div className='form-group'>
+                    <label htmlFor='selection'></label>
+                    <select id='selection' className='form-control'>
+                      <option value=''>Animation demandée ?</option>
+                      <optgroup label='Archery Battle'>
+                        <option value=''>Archery Battle - 1 heure</option>
+                        <option value=''>Archery Battle - 2 heures</option>
+                        <option value=''>Archery Battle - 3 heures</option>
+                      </optgroup>
+                      <optgroup label='Les sumos'>
+                        <option value=''>Les sumos - 1 heure</option>
+                        <option value=''>Les sumos - 2 heures</option>
+                        <option value=''>Les sumos - 3 heures</option>
+                      </optgroup>
+                    </select>
+                  </div>
                 </div>
-                <label
+
+                {/* <label
                   htmlFor='exampleFormControlInput2'
                   className='form-label'
                 >
@@ -73,8 +94,8 @@ const PageReservation = () => {
                   type='text'
                   className='form-control'
                   id='exampleFormControlInput3'
-                  placeholder='ex : particulier, société, association ou autre'
-                />
+                  placeholder='ex : Terrain aménagé ou chez le Particulier'
+                /> */}
                 <label
                   htmlFor='exampleFormControlInput3'
                   className='form-label'
