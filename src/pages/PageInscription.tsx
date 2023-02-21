@@ -82,14 +82,13 @@ const PageInscription = () => {
           <div>
             <label htmlFor='basic-url' className='form-label fw-bold'>
               Afin de vous inscrire, nous avons besoin de quelques éléments vous
-              concernant : merci de saisir les différents champs, s'il vous
-              plait.
+              concernant :
             </label>
             <div className='input-group mb-3'>
               <span className='input-group-text' id='basic-addon2'>
                 {/* L'élément <pre></pre> formate le texte de façon à obtenir un espace entre 'votre' et 'nom' */}
                 <pre>
-                  Quel est votre <strong>nom</strong>, s'il vous plait ?
+                  Quel est votre <strong>nom</strong> ?
                 </pre>
               </span>
               <input
@@ -106,7 +105,7 @@ const PageInscription = () => {
               <span className='input-group-text' id='basic-addon1'>
                 {/* L'élément <pre></pre> formate le texte de façon à obtenir un espace entre 'votre' et 'prénom' */}
                 <pre>
-                  Quel est votre <strong>prénom</strong>, s'il vous plait ?
+                  Quel est votre <strong>prénom</strong> ?
                 </pre>
               </span>
               <input
@@ -125,13 +124,13 @@ const PageInscription = () => {
               <span className='input-group-text' id='basic-addon2'>
                 {/* L'élément <pre></pre> formate le texte de façon à obtenir un espace entre 'votre' et 'adresse' */}
                 <pre>
-                  Quelle est votre <strong>adresse</strong>, s'il vous plait ?
+                  Quelle est votre <strong>adresse</strong> ?
                 </pre>
               </span>
               <input
                 type='text'
                 className='form-control'
-                placeholder="ex :     1, rue de l'impasse qui mène quand même vers quelquechose"
+                placeholder="ex :  1, rue de l'impasse qui mène quand même vers quelquechose"
                 aria-label="Recipient's useradress"
                 aria-describedby='basic-addon2'
                 ref={adressElement}
@@ -143,8 +142,7 @@ const PageInscription = () => {
               <span className='input-group-text' id='basic-addon2'>
                 {/* L'élément <pre></pre> formate le texte de façon à obtenir un espace entre 'votre' et 'code postal' */}
                 <pre>
-                  Quelle est votre <strong>code postal</strong>, s'il vous plait
-                  ?
+                  Quelle est votre <strong>code postal</strong> ?
                 </pre>
               </span>
               <input
@@ -162,8 +160,7 @@ const PageInscription = () => {
               <span className='input-group-text' id='basic-addon2'>
                 {/* L'élément <pre></pre> formate le texte de façon à obtenir un espace entre 'votre' et 'city' */}
                 <pre>
-                  Quelle est votre <strong>ville ou village</strong>, s'il vous
-                  plait ?
+                  Quelle est votre <strong>ville ou village</strong> ?
                 </pre>
               </span>
               <input
@@ -181,8 +178,7 @@ const PageInscription = () => {
               <span className='input-group-text' id='basic-addon2'>
                 {/* L'élément <pre></pre> formate le texte de façon à obtenir un espace entre 'votre' et 'phone' */}
                 <pre>
-                  Quelle est votre <strong>numéro de téléphone</strong>, s'il
-                  vous plait ?
+                  Quelle est votre <strong>numéro de téléphone</strong> ?
                 </pre>
               </span>
               <input
@@ -197,13 +193,12 @@ const PageInscription = () => {
             </div>
             <label htmlFor='basic-url' className='form-label fw-bold'>
               Afin de vous connecter facilement par la suite, merci de saisir
-              vos identifiants, s'il vous plait.
+              vos identifiants :
             </label>
             <div className='input-group mb-3'>
               <span className='input-group-text' id='basic-addon2'>
                 <pre>
-                  Quelle est votre <strong>adresse e.mail</strong>, s'il vous
-                  plait :
+                  Quelle est votre <strong>adresse e.mail</strong> :
                 </pre>
               </span>
               <input
@@ -219,8 +214,7 @@ const PageInscription = () => {
             <div className='input-group mb-3'>
               <span className='input-group-text' id='basic-addon2'>
                 <pre>
-                  Quel sera votre <strong>mot de passe</strong> pour ce site,
-                  s'il vous plait :
+                  Quel sera votre <strong>mot de passe</strong> pour ce site :
                 </pre>
               </span>
               <input
