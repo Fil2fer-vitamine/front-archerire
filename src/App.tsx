@@ -11,6 +11,7 @@ import PageInformations from './pages/PageInformations';
 import PagePhoto from './pages/PagePhoto';
 import PageListeReservations from './pages/PageListeReservations';
 import PageReservation from './pages/PageReservation';
+import Meteo from './components/Meteo';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
       <BrowserRouter>
         <LogoHaut />
         <Navbar />
+        <Meteo />
         <Routes>
           {/* Où qu'on aille, ... on aura le composant navbar */}
           <Route path='/' element={<PageHome />} />
