@@ -10,7 +10,7 @@ import PageConnexion from './pages/PageConnexion';
 import PageInformations from './pages/PageInformations';
 import PagePhoto from './pages/PagePhoto';
 import PageListeReservations from './pages/PageListeReservations';
-import PageReservation from './pages/NON OP PageReservation';
+import PageReservation from './pages/PageReservation';
 
 function App() {
   return (

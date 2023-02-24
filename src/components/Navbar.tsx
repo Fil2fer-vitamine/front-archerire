@@ -1,3 +1,5 @@
+import { NavLink } from 'react-router-dom';
+
 const Navbar = () => {
   return (
     <div className='centrage'>
@@ -70,9 +72,9 @@ const Navbar = () => {
                   </li>
                   <li>
                     <a className='dropdown-item' href='PageReservation'>
-                      <strong>&#128486;</strong>{' '}
-                      <em>... Faisons une réservation ...</em>
-                      <strong> &#128487;</strong>
+                      <NavLink to='/Reservation' end className='nav-link'>
+                        <strong>Vous souhaitez réserver ???</strong>
+                      </NavLink>
                     </a>
                   </li>
                 </ul>

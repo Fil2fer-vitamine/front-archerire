@@ -9,7 +9,7 @@ const PageHome = () => {
           <div>
             <div className='centrage'>
               <p>Bonjour et bienvenue,</p>
-              {/* On pourra mettre le bonjour à l'utilisateur de par son nom dès que l'onb aura fait l'identification côté Front-end */}
+              {/* On pourra mettre le bonjour à l'utilisateur de par son nom dès que l'on aura fait l'identification côté Front-end */}
             </div>
             <Carousel2 />
             <BoutonArchery />

@@ -1,12 +1,17 @@
 import Button from 'react-bootstrap/esm/Button';
-import location from '../components/NON OP ListeVilles';
+import ListeVilles from '../components/ListeVilles';
+import Meteo from '../components/Meteo';
 
 const PageReservation = () => {
   return (
     <div>
+      <Meteo />
+      <ListeVilles />
       <div className='container'>
         <h2>Page de réservation</h2>
-        {/* Trigger the modal with a button */}
+
+        {/* _____________________Trigger the modal with a button___________________________ */}
+
         <Button
           type='button'
           className='btn btn-success'
@@ -16,7 +21,7 @@ const PageReservation = () => {
           Cliquez ici pour réserver ...
         </Button>
 
-        {/* Modal */}
+        {/* _______________________________________Modal__________________________________________ */}
         <div
           className='modal fade'
           id='exampleModal'

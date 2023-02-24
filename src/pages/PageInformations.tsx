@@ -158,10 +158,11 @@ const PageInformations = () => {
               Il faut mener une équipe à la victoire en éliminant les
               adversaires ou en cherchant la précision pour viser, avec arc et
               flèches, les cibles sur le terrain. <br></br>
-              Vous pouvez tenter une stratégie avec vos coéquipiers ou décider
-              de vous la <code>jouer en solo</code> pour tenter de devenir, à la
-              fin de la partie, un des plus dignes héritiers de Messire Robin
-              des bois !!!<br></br>
+              Vous pouvez tenter une{' '}
+              <code> stratégie avec vos coéquipiers</code> ou décider de vous la{' '}
+              <code>jouer en solo</code> pour tenter de devenir, à la fin de la
+              partie, un des plus dignes héritiers de Messire Robin des bois !!!
+              <br></br>
               Parfois, des tournois sont organisés lorsque plusieurs équipes
               sont constituées : là, le jeu prend une toute autre dimension ...
             </div>
