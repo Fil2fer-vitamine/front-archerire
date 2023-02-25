@@ -26,11 +26,11 @@ function App() {
           <Route path='/PageInscription' element={<PageInscription />} />
           <Route path='/PageConnexion' element={<PageConnexion />} />
           <Route path='/PageInformations' element={<PageInformations />} />
-          <Route path='/Photo' element={<PagePhoto />} />
-          <Route
+          <Route path='/PagePhotos' element={<PagePhoto />} />
+          {/* <Route
             path='/PageListeReservations'
             element={<PageListeReservations />}
-          />
+          /> */}
           <Route path='/Reservation' element={<PageReservation />} />
         </Routes>
         <LogoBas />
