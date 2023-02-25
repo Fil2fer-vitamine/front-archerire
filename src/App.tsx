@@ -19,7 +19,6 @@ function App() {
       <BrowserRouter>
         <LogoHaut />
         <Navbar />
-        <Meteo />
         <Routes>
           {/* Où qu'on aille, ... on aura le composant navbar */}
           <Route path='/' element={<PageHome />} />
