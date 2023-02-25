@@ -6,7 +6,7 @@ const PageReservation = () => {
   return (
     <div>
       <Meteo />
-      <ListeVilles />
+      {/* <ListeVilles /> */}
       <div className='container'>
         <h2>Page de réservation</h2>
 
