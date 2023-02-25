@@ -11,7 +11,9 @@ function OutlineTypesExample() {
         </NavLink>
       </Button>
       <Button className='photos' variant='outline-success' size='lg'>
-        Voulez-vous plus de photos ?
+        <NavLink to='/PagePhotos' end className='nav-link'>
+          Voulez-vous plus de photos ?
+        </NavLink>
       </Button>
       <Button
         className='reservation'
