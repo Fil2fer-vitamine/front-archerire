@@ -1,12 +1,13 @@
 import { NavLink } from 'react-router-dom';
-import Carousel1 from '../components/Carousel1';
+import CarouselInformation from '../components/CarouselInformation';
+
 
 const PageInformations = () => {
   return (
     <div>
       <div className='carousels'>
         <div className='d-flex p-2 bd-highlight'>
-          <Carousel1 />
+          <CarouselInformation />
         </div>
       </div>
       <div className='accordion accordion-flush' id='accordionFlushExample'>

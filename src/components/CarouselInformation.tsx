@@ -1,7 +1,7 @@
 const Carousel2 = () => {
   return (
     <div className='centrage'>
-      <div className='w-50 bg-info'>
+      <div className='w-25 bg-info'>
         {/* Cette div nous permet d'obtenir un carousel de petite dimension.
       w-50 : l'élément a une largeur égale à 50% de celle de son parent ;*/}
 
