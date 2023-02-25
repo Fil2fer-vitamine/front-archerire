@@ -89,8 +89,9 @@ const PageInformations = () => {
               <code> paintball</code>, sans pour autant avoir les désagréments
               dus à la peinture.
               <br></br>
-              Notre équipe s'est concentré sur ce qu'apporte, en teme de loisir,
-              l'archery battle, également appelé 'archery tag'...<br></br>
+              Notre équipe s'est concentrée sur ce qu'apporte, en teme de
+              loisir, l'archery battle, également appelé 'archery tag'...
+              <br></br>
               Les joueurs sont équipés d'arcs et de flèches (avec, sur chacune
               d'entre elles, à son extrémité, une protection en mousse).
               <br></br>
