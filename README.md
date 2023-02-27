@@ -44,3 +44,39 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
+
+---
+
+- Utilisation du fichier package.json à la racine du projet :
+- il décrit les dépendances d’un projet pour le node.package manager
+- 3 parties à remarquer dans ce fichier :
+- - Allusion à Reactjs et Typescript,
+-
+- - Des scripts :
+
+* ‘start’ permet de mettre en place un petit environnement de développement pour tester l’application Reactjs directement dans un navigateur et le voir évoluer simultanément au code établi.
+* ‘build’ nous permettra de livrer l’application lorsque la partie développement sera terminé : on parle de déploiement sur internet.
+
+-
+- - Des éléments de configuration :
+
+* ‘eslint’ – il analyse la syntaxe du code écrit en ES6.
+* ‘BrowserList’ permet de configurer le comportement de certains scripts en fonction des navigateurs
+
+---
+
+- Utilisation du fichier tsconfig.ts à la racine du projet :
+- fichier de configuration de typescript.
+- "target": "es5" --> veut dire que le script sera compilé vers du code javascript es5.
+  Actuellement, on en est à es6 ... on pourrait le mettre ...
+- "jsx": "react-jsx" --> nous utiliserons du code JSX qu'on aura besoin de compiler en javascript. Le fait de passer l'extension .tsx aux différents fichiers permettra une compilation prenant en compte le JSX (TSX = Typescript + JSX)
+- "include": ["src"] --> indique au compilateur de typescript où se trouvent les fichiers que nous voulons compiler vers javascript.
+
+---
+
+Pour installer le fichier node_modules, nous utilisons la commande :
+--> npm install
+
+Le fichier node_modules contient toutes les dépendances pour faire fonctionner le projet.
+
+---

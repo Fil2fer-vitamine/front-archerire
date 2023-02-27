@@ -10,7 +10,7 @@
       rgba(54, 54, 250, 0.5),
       rgba(255, 255, 0, 0.5)
     ),
-    url(/public/Assets/ImagePanoplie/un-arc.png);
+    url('/public/Assets/ImagePanoplie/un-arc.png');
   background-size: cover;
 }
 
@@ -26,7 +26,7 @@
       rgba(54, 54, 250, 0.5),
       rgba(255, 255, 0, 0.5)
     ),
-    url(/public/Assets/ImagePanoplie/fleches.png);
+    url('/public/Assets/ImagePanoplie/fleches.png');
   background-size: cover;
 }
 
@@ -42,7 +42,7 @@
       rgba(54, 54, 250, 0.5),
       rgba(255, 255, 0, 0.5)
     ),
-    url(/public/Assets/ImagePanoplie/lemasque.png);
+    url('/public/Assets/ImagePanoplie/lemasque.png');
   background-size: cover;
 }
 
@@ -58,7 +58,7 @@
       rgba(54, 54, 250, 0.5),
       rgba(255, 255, 0, 0.5)
     ),
-    url(/public/Assets/ImagePanoplie/bunker.png);
+    url('/public/Assets/ImagePanoplie/bunker.png');
   background-size: cover;
 }
 
@@ -79,7 +79,7 @@
   width: 100%;
   height: 50%;
   overflow: hidden;
-  background-image: url(/public/Assets/ImageLogo/logo.png);
+  background-image: url('/public/Assets/ImagePanoplie/bunker.png');
   filter: blur(5px);
   background-size: contain; /* contain permet d'obtenir le logo à 100% */
   opacity: 0.3;

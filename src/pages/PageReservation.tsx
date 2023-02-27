@@ -1,12 +1,44 @@
+import axios from 'axios';
+import { useEffect, useState } from 'react';
 import Button from 'react-bootstrap/esm/Button';
-import ListeVilles from '../components/ListeVilles';
 import Meteo from '../components/Meteo';
+import { Location } from '../components/ListeVilles';
 
+/**
+ * L'import { Location } nous permet de nous brancher à ce qui se fait pour les villes.
+ * --> Récupération de l'interface Location du fichier ListeVilles.tsx afin de l'utiliser dans un
+ * formulaire
+ * Initialisation de la constante 'villes' devant contenir les valeurs à 'vide'.
+ */
+let villes: Location[] = [];
+
+/**
+ * Utilisation de useState() pour afficher les valeurs dès l'apparition de la page.
+ * Le useState est initialisé à tableau 'vide'
+ */
 const PageReservation = () => {
+  const [lesVilles, setLesVilles] = useState<Location[]>([]);
+
+  /**
+   * Utilisation d'un UseEffect pour n'avoir qu'un get au moment du changement.
+   * Utilisation du client HTTP axios() entre le Frontend et le Backend pour lire
+   * ce qu'il y a dans la base de données
+   */
+  useEffect(() => {
+    axios.get(`http://localhost:8080/api/locations`).then((res) => {
+      villes = res.data;
+      console.log("Les villes que j'ai récupéré : ", villes);
+      setLesVilles(villes);
+      /**
+       * lesVilles : variable actuelle
+       * setLesVilles : fonction qui permet de passer les villes une à une dans un autre tableau
+       *  et de les afficher.
+       */
+    });
+  }, []);
   return (
     <div>
       <Meteo />
-      {/* <ListeVilles /> */}
       <div className='container'>
         <h2>Page de réservation</h2>
 
@@ -117,8 +149,13 @@ const PageReservation = () => {
                       >
                         Villes et villages autour de Fresnoy-en-Thelle :
                       </option>
-                      <optgroup label='A moins de 10 kms :'>
-                        {/* <option value=''>{location.village_name_id}</option> */}
+                      {lesVilles.map((ville) => (
+                        <option key={ville.id} value={ville.village_name}>
+                          {ville.village_name}
+                        </option>
+                      ))}
+                      {/* <optgroup label='A moins de 10 kms :'>
+                        <option value=''>{location.village_name_id}</option>
                         <option value=''>Fresnoy-en-Thelle - 0 km</option>
                         <option value=''>Morangle - 1,9 km</option>
                         <option value=''>Le Mesnil-en-Thelle - 2,73 kms</option>
@@ -207,7 +244,7 @@ const PageReservation = () => {
                       </optgroup>
                       <optgroup label='Entre 20 à 30 kms :'>
                         <option value=''>xxxxxx - 20,xx kms</option>
-                      </optgroup>
+                      </optgroup> */}
                     </select>
                   </div>
                   {/* ---------------------------------------------------------------------------- */}
