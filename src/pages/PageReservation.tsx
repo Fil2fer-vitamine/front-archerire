@@ -1,16 +1,31 @@
 import axios from 'axios';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Button from 'react-bootstrap/esm/Button';
 import Meteo from '../components/Meteo';
 import { Location } from '../components/ListeVilles';
 
 /**
  * L'import { Location } nous permet de nous brancher à ce qui se fait pour les villes.
- * --> Récupération de l'interface Location du fichier ListeVilles.tsx afin de l'utiliser dans un
- * formulaire
+ * --> Récupération de l'interface Location du fichier ListeVilles.tsx afin de l'utiliser
+ * dans un formulaire
  * Initialisation de la constante 'villes' devant contenir les valeurs à 'vide'.
  */
 let villes: Location[] = [];
+
+interface Animationsrequested {
+  id: string;
+  date: string;
+  kind_of_animation: string;
+  number_of_participants: number;
+  for_who: string;
+  question: string;
+  decision_admin: boolean;
+  comments_admin: string;
+  negociation: string;
+}
+
+let animation: Animationsrequested[] = [];
+console.log("visualisation de 'animation' : ", animation);
 
 /**
  * Utilisation de useState() pour afficher les valeurs dès l'apparition de la page.
@@ -18,7 +33,13 @@ let villes: Location[] = [];
  */
 const PageReservation = () => {
   const [lesVilles, setLesVilles] = useState<Location[]>([]);
-
+  const [lesAnimations, setLesAnimations] = useState<Animationsrequested[]>([]);
+  const dateInput = useRef<HTMLInputElement | null>(null);
+  const kind_of_animationInput = useRef<HTMLInputElement | null>(null);
+  const number_of_participantsInput = useRef<HTMLInputElement | null>(null);
+  const for_whoInput = useRef<HTMLInputElement | null>(null);
+  const questionInput = useRef<HTMLInputElement | null>(null);
+  const locationInput = useRef<HTMLInputElement | null>(null);
   /**
    * Utilisation d'un UseEffect pour n'avoir qu'un get au moment du changement.
    * Utilisation du client HTTP axios() entre le Frontend et le Backend pour lire
@@ -27,7 +48,8 @@ const PageReservation = () => {
   useEffect(() => {
     axios.get(`http://localhost:8080/api/locations`).then((res) => {
       villes = res.data;
-      console.log("Les villes que j'ai récupéré : ", villes);
+
+      // console.log("Les villes que j'ai récupéré : ", villes);
       setLesVilles(villes);
       /**
        * lesVilles : variable actuelle
@@ -36,6 +58,19 @@ const PageReservation = () => {
        */
     });
   }, []);
+
+  useEffect(() => {
+    /**
+     * Pour l'enregistrement d'une animation :
+     * utilisation de useRef
+     */
+    axios.get(`http://localhost:8080/api/animationsrequested`).then((resp) => {
+      animation = resp.data;
+      console.log('Les animations que je récupère : ', animation);
+      setLesAnimations(animation);
+    });
+  }, []);
+
   return (
     <div>
       <Meteo />
@@ -65,7 +100,7 @@ const PageReservation = () => {
             <div className='modal-content'>
               <div className='modal-header'>
                 <h1 className='modal-title fs-5' id='exampleModalLabel'>
-                  Nouvelle réservation
+                  Votre nouvelle réservation
                 </h1>
                 <button
                   type='button'
@@ -87,10 +122,15 @@ const PageReservation = () => {
                     className='form-control'
                     id='exampleFormControlInput1'
                     placeholder='ex : ANDRE-DE-LA-TOUR'
+                    // ref={kind_of_animationInput}
                   />
                   <div className='form-group'>
                     <label htmlFor='selection'></label>
-                    <select id='selection' className='form-control'>
+                    <select
+                      id='selection'
+                      className='form-control'
+                      ref={kind_of_animationInput}
+                    >
                       <option value=''>Pour qui est faite la demande ?</option>
                       <optgroup label='... vous même ?'>
                         <option value=''>un particulier.</option>
@@ -154,127 +194,10 @@ const PageReservation = () => {
                           {ville.village_name}
                         </option>
                       ))}
-                      {/* <optgroup label='A moins de 10 kms :'>
-                        <option value=''>{location.village_name_id}</option>
-                        <option value=''>Fresnoy-en-Thelle - 0 km</option>
-                        <option value=''>Morangle - 1,9 km</option>
-                        <option value=''>Le Mesnil-en-Thelle - 2,73 kms</option>
-                        <option value=''>Neuilly-en-Thelle - 2,80 kms</option>
-                        <option value=''>
-                          Puiseux-le-Hauberger - 2,89 kms
-                        </option>
-                        <option value=''>Dieudonné - 3,69 kms</option>
-                        <option value=''>Belle-Eglise - 4,04 kms</option>
-                        <option value=''>Crouy-en-Thelle - 4,07 kms</option>
-                        <option value=''>Chambly - 4,22 kms</option>
-                        <option value=''>Ercuis - 4,48 kms</option>
-                        <option value=''>Bornel - 4,66 kms</option>
-                        <option value=''>Bernes-sur-Oise - 5,18 kms</option>
-                        <option value=''>Ronquerolles - 5,30 kms</option>
-                        <option value=''>Persan - 5,59 kms</option>
-                        <option value=''>Bruyères-sur-Oise - 6,51 kms</option>
-                        <option value=''>
-                          Blaincourt-lès-Précy - 6,67 kms
-                        </option>
-                        <option value=''>Beaumont-sur-Oise - 6,72 kms</option>
-                        <option value=''>Précy-sur-Oise - 7,22 kms</option>
-                        <option value=''>Boran-sur-Oise - 7,26 kms</option>
-                        <option value=''>Mours - 7,65 kms</option>
-                        <option value=''>Esches - 7,84 kms</option>
-                        <option value=''>
-                          Lachapelle-Saint-Pierre - 7,94 kms
-                        </option>
-                        <option value=''>Champagne-sur-Oise - 8,07 kms</option>
-                        <option value=''>Nointel - 8,26 kms</option>
-                        <option value=''>Noisy-sur-Oise - 8,51 kms</option>
-                        <option value=''>Ully-saint-Georges - 8,61 kms</option>
-                        <option value=''>Foulangues - 8,81 kms</option>
-                        <option value=''>Novillers - 8,87 kms</option>
-                        <option value=''>
-                          MorteFontaine-en-Thelle - 9,08 kms
-                        </option>
-                        <option value=''>Hédouville - 9,22 kms</option>
-                        <option value=''>
-                          Villers-sous-saint-Leu - 9,23 kms
-                        </option>
-                        <option value=''>Presles - 9,66 kms</option>
-                        <option value=''>Asnières-sur-Oise - 9,88 kms</option>
-                        <option value=''>Maysel - 9,90 kms</option>
-                      </optgroup>
-                      <optgroup label='Entre 10 à 20 kms :'>
-                        <option value=''>Andeville - 10,06 kms</option>
-                        <option value=''>Cires-lès-Mello - 10,17 kms</option>
-                        <option value=''>Mello - 10,34 kms</option>
-                        <option value=''>Méru - 10,50 kms</option>
-                        <option value=''>
-                          Saint-Leu-d'Esserent - 10,62 kms
-                        </option>
-                        <option value=''>Frouville - 10,64 kms</option>
-                        <option value=''>Gouvieux - 10,65 kms</option>
-                        <option value=''>Parmain - 10,76 kms</option>
-                        <option value=''>L'Isle-Adam - 10,78 kms</option>
-                        <option value=''>Nesles-la-Vallée - 10,88 kms</option>
-                        <option value=''>Amblainville - 10,95 kms</option>
-                        <option value=''>Viarmes - 11,55 kms</option>
-                        <option value=''>Sainte-Geneviève - 11,24 kms</option>
-                        <option value=''>Cramoisy - 11,24 kms</option>
-                        <option value=''>Cauvigny - 11,26 kms</option>
-                        <option value=''>
-                          Saint-Vaast-lès-Mello - 11,42 kms
-                        </option>
-                        <option value=''>
-                          Balagny-sur-Thérain - 11,55 kms
-                        </option>
-                        <option value=''>Arronville - 11,62 kms</option>
-                        <option value=''>Labbeville - 11,78 kms</option>
-                        <option value=''>
-                          Saint-Martin-du-Tertre - 11,84 kms
-                        </option>
-                        <option value=''>Nerville-la-Forêt - 12,48 kms</option>
-                        <option value=''>Seugy - 12,65 kms</option>
-                        <option value=''>
-                          Laboissière-en-Thelle - 12,68 kms
-                        </option>
-                        <option value=''>Thiverny - 12,75 kms</option>
-                        <option value=''>Menouville - 13,01 kms</option>
-                        <option value=''>Valmondois - 13,16 kms</option>
-                        <option value=''>Montataire - 13,17 kms</option>
-                        <option value=''>Saint-Maximin - 13,28 kms</option>
-                        <option value=''>Vallangoujard - 13,40 kms</option>
-                      </optgroup>
-                      <optgroup label='Entre 20 à 30 kms :'>
-                        <option value=''>xxxxxx - 20,xx kms</option>
-                      </optgroup> */}
                     </select>
                   </div>
-                  {/* ---------------------------------------------------------------------------- */}
-                  {/* <div className='form-group'>
-                    <label htmlFor='selection'></label>
-                    <select id='selection' className='form-control'>
-                      <option value=''>Localisation</option>
-
-                      <option value=''>
-                        
-                        ### Mettre les différentes villes à disposition de la
-                        base de données...
-                        http://localhost:8080/api/locations ###
-                      </option>
-                    </select>
-                  </div> */}
                 </div>
 
-                {/* <label
-                  htmlFor='exampleFormControlInput4'
-                  className='form-label'
-                >
-                  ville :
-                </label>
-                <input
-                  type='text'
-                  className='form-control'
-                  id='exampleFormControlInput5'
-                  placeholder='ex : Fresnoy-En-Thelle'
-                /> */}
                 <label
                   htmlFor='exampleFormControlInput5'
                   className='form-label'
@@ -286,6 +209,7 @@ const PageReservation = () => {
                   className='form-control'
                   id='exampleFormControlInput6'
                   placeholder='ex : 12'
+                  ref={number_of_participantsInput}
                 />
                 <label
                   htmlFor='exampleFormControlInput6'
@@ -297,6 +221,7 @@ const PageReservation = () => {
                   type='date'
                   className='form-control'
                   id='exampleFormControlInput7'
+                  ref={dateInput}
                 />
 
                 <div className='mb-3'>
@@ -327,6 +252,16 @@ const PageReservation = () => {
               </div>
             </div>
           </div>
+        </div>
+        <div>
+          {/* Mise des différentes animations enregistrées */}
+          {lesAnimations.map((animation) => (
+            <div className='AfficheEvenement'>
+              <p>date : {animation.date}</p>
+              <p>nom : {animation.kind_of_animation}</p>
+              <p>number : {animation.number_of_participants}</p>
+            </div>
+          ))}
         </div>
       </div>
     </div>

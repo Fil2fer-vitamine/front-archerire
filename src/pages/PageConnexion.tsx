@@ -55,6 +55,7 @@ const Connexion = () => {
          * Alors on obtiendra une réponse...
          */
         console.log('réponse du post de login : ', response);
+        console.log('Customer : ',Customer);
 
         const token = response.data.accessToken;
         console.log(response.data.accessToken);

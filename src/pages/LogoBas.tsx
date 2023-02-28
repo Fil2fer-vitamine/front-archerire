@@ -1,8 +1,10 @@
-import "./LogoBas.css"
+import ReseauxSociaux from '../components/ReseauxSociaux';
+import './LogoBas.css';
 
 const LogoDroit = () => {
   return (
     <div>
+      {/* <ReseauxSociaux /> */}
       <div>
         <img
           className='logoBas'

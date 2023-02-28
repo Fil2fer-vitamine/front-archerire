@@ -1,5 +1,24 @@
+import { useState } from 'react';
 import BoutonArchery from '../components/BoutonArchery';
 import CarouselHome from '../components/CarouselHome';
+
+interface Customer {
+  id: string;
+  name: string;
+  firstname: string;
+  adress: string;
+  postal_code: string;
+  city: string;
+  phone: string;
+  email: string;
+  password: string;
+}
+
+// let customer: Customer[] = [];
+
+// const Bienvenue = () => {
+//   const [nomBienvenue, setBienvenue] = useState<Location[]>([]);
+//   const [lesAnimations, setLesAnimations] = useState<Animationsrequested[]>([]);
 
 const PageHome = () => {
   return (
