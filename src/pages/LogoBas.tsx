@@ -4,7 +4,7 @@ import './LogoBas.css';
 const LogoDroit = () => {
   return (
     <div>
-      {/* <ReseauxSociaux /> */}
+      <ReseauxSociaux />
       <div>
         <img
           className='logoBas'

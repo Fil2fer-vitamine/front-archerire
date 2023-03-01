@@ -34,12 +34,14 @@ console.log("visualisation de 'animation' : ", animation);
 const PageReservation = () => {
   const [lesVilles, setLesVilles] = useState<Location[]>([]);
   const [lesAnimations, setLesAnimations] = useState<Animationsrequested[]>([]);
+  // useRef :
   const dateInput = useRef<HTMLInputElement | null>(null);
-  const kind_of_animationInput = useRef<HTMLInputElement | null>(null);
+  const kind_of_animationInput = useRef<HTMLSelectElement>(null); // Se trouve sur la table animationrequested
   const number_of_participantsInput = useRef<HTMLInputElement | null>(null);
-  const for_whoInput = useRef<HTMLInputElement | null>(null);
-  const questionInput = useRef<HTMLInputElement | null>(null);
-  const locationInput = useRef<HTMLInputElement | null>(null);
+  // const inputRef = useRef() as MutableRefObject<HTMLInputElement>;
+  const for_whoRef = useRef<HTMLSelectElement>(null); // Se trouve sur la table animationrequested
+  const questionInput = useRef<HTMLTextAreaElement | null>(null);
+  const locationInput = useRef<HTMLSelectElement | null>(null);
   /**
    * Utilisation d'un UseEffect pour n'avoir qu'un get au moment du changement.
    * Utilisation du client HTTP axios() entre le Frontend et le Backend pour lire
@@ -70,6 +72,25 @@ const PageReservation = () => {
       setLesAnimations(animation);
     });
   }, []);
+
+  // axios.get(`http://localhost:8080/api/customer`).then(() => {});
+
+  const EnregistrerResa = (e: React.MouseEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    console.log('Les useRef date :', dateInput.current?.value);
+    console.log('Les useRef ville :', locationInput.current?.value);
+
+    console.log(
+      'Les useRef animation :',
+      kind_of_animationInput.current?.value
+    );
+    console.log('Les useRef for_who :', for_whoRef.current?.value);
+    console.log(
+      'Les useRef number_of_participants :',
+      number_of_participantsInput.current?.value
+    );
+    console.log('Les useRef question :', questionInput.current?.value);
+  };
 
   return (
     <div>
@@ -109,147 +130,187 @@ const PageReservation = () => {
                   aria-label='Close'
                 ></button>
               </div>
-              <div className='modal-body'>
-                <div className='mb-3'>
+              {/* Debut form */}
+              <form onSubmit={EnregistrerResa}>
+                <div className='modal-body'>
+                  <div className='mb-3'>
+                    <label
+                      htmlFor='exampleFormControlInput1'
+                      className='form-label'
+                    >
+                      Veuillez nous indiquer votre nom :
+                    </label>
+                    <input
+                      type='text'
+                      className='form-control'
+                      id='exampleFormControlInput1'
+                      placeholder='ex : ANDRE-DE-LA-TOUR'
+                    />
+                    <div className='form-group'>
+                      <label htmlFor='selection'>
+                        <select
+                          id='selection'
+                          className='form-control'
+                          ref={for_whoRef}
+                        >
+                          <option value=''>
+                            Pour qui est faite la demande ?
+                          </option>
+                          <optgroup label='... vous même ?'>
+                            <option value='un particulier.'>
+                              un particulier.
+                            </option>
+                          </optgroup>
+                          <optgroup label='... une entité ?'>
+                            <option value='une entreprise.'>
+                              une entreprise.
+                            </option>
+                            <option value='une association.'>
+                              une association.
+                            </option>
+                            <option value='une communauté.'>
+                              une communauté.
+                            </option>
+                          </optgroup>
+                        </select>
+                      </label>
+                    </div>
+                    <div className='form-group'>
+                      <label id='kindOf' htmlFor='selection'></label>
+                      <select
+                        id='kindOf'
+                        className='form-control'
+                        ref={kind_of_animationInput}
+                      >
+                        <option value=''>Animation demandée ?</option>
+                        <optgroup label='Archery Battle'>
+                          <option value='Archery Battle - 1 heure'>
+                            Archery Battle - 1 heure
+                          </option>
+                          <option value='Archery Battle - 2 heures'>
+                            Archery Battle - 2 heures
+                          </option>
+                          <option value='Archery Battle - 3 heures'>
+                            Archery Battle - 3 heures
+                          </option>
+                        </optgroup>
+                        <optgroup label='Les sumos'>
+                          <option value='Les sumos - 1 heure'>
+                            Les sumos - 1 heure
+                          </option>
+                          <option value='Les sumos - 2 heures'>
+                            Les sumos - 2 heures
+                          </option>
+                          <option value='Les sumos - 3 heures'>
+                            Les sumos - 3 heures
+                          </option>
+                        </optgroup>
+                      </select>
+                    </div>
+
+                    {/* Input de version 2 */}
+                    {/* <div className='form-group'>
+                      <label htmlFor='selection'></label>
+                      <select id='selection' className='form-control'>
+                        <option value=''>Endroit à prendre en compte :</option>
+                        <optgroup label='Chez le particulier'>
+                          <option value=''>
+                            Chez le particulier (ATTENTION : un terrain d'au
+                            moins 4x5 mètres est requis pour cette activité).
+                          </option>
+                        </optgroup>
+                        <optgroup label="A l'extérieur">
+                          <option value=''>En forêt</option>
+                          <option value=''>Sur un stade</option>
+                          <option value=''>
+                            * Autre (Merci de nous indiquer le type de terrain
+                            dans la partie 'Notes')
+                          </option>
+                        </optgroup>
+                      </select>
+                    </div> */}
+
+                    {/* ------------------------Essai de récupération des villes----------------------------------- */}
+                    <div className='form-group'>
+                      <label htmlFor='selection'></label>
+                      <select
+                        id='selection'
+                        className='form-control'
+                        ref={locationInput}
+                      >
+                        <option
+                          value=''
+                          title="appuyez plusieurs fois sur la première lettre de votre ville recherchée jusqu'à obtenir la bonne."
+                        >
+                          Villes et villages autour de Fresnoy-en-Thelle :
+                        </option>
+                        {lesVilles.map((ville) => (
+                          <option key={ville.id} value={ville.village_name}>
+                            {ville.village_name}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                  </div>
+
                   <label
-                    htmlFor='exampleFormControlInput1'
+                    htmlFor='exampleFormControlInput5'
                     className='form-label'
                   >
-                    Veuillez nous indiquer votre nom :
+                    nombre de participants :
                   </label>
                   <input
-                    type='text'
+                    type='number'
                     className='form-control'
-                    id='exampleFormControlInput1'
-                    placeholder='ex : ANDRE-DE-LA-TOUR'
-                    // ref={kind_of_animationInput}
+                    id='exampleFormControlInput6'
+                    placeholder='ex : 12'
+                    ref={number_of_participantsInput}
                   />
-                  <div className='form-group'>
-                    <label htmlFor='selection'></label>
-                    <select
-                      id='selection'
-                      className='form-control'
-                      ref={kind_of_animationInput}
-                    >
-                      <option value=''>Pour qui est faite la demande ?</option>
-                      <optgroup label='... vous même ?'>
-                        <option value=''>un particulier.</option>
-                      </optgroup>
-                      <optgroup label='... une entité ?'>
-                        <option value=''>une entreprise.</option>
-                        <option value=''>une association.</option>
-                        <option value=''>une communauté.</option>
-                      </optgroup>
-                    </select>
-                  </div>
-                  <div className='form-group'>
-                    <label htmlFor='selection'></label>
-                    <select id='selection' className='form-control'>
-                      <option value=''>Animation demandée ?</option>
-                      <optgroup label='Archery Battle'>
-                        <option value=''>Archery Battle - 1 heure</option>
-                        <option value=''>Archery Battle - 2 heures</option>
-                        <option value=''>Archery Battle - 3 heures</option>
-                      </optgroup>
-                      <optgroup label='Les sumos'>
-                        <option value=''>Les sumos - 1 heure</option>
-                        <option value=''>Les sumos - 2 heures</option>
-                        <option value=''>Les sumos - 3 heures</option>
-                      </optgroup>
-                    </select>
-                  </div>
-                  <div className='form-group'>
-                    <label htmlFor='selection'></label>
-                    <select id='selection' className='form-control'>
-                      <option value=''>Endroit à prendre en compte :</option>
-                      <optgroup label='Chez le particulier'>
-                        <option value=''>
-                          Chez le particulier (ATTENTION : un terrain d'au moins
-                          4x5 mètres est requis pour cette activité).
-                        </option>
-                      </optgroup>
-                      <optgroup label="A l'extérieur">
-                        <option value=''>En forêt</option>
-                        <option value=''>Sur un stade</option>
-                        <option value=''>
-                          * Autre (Merci de nous indiquer le type de terrain
-                          dans la partie 'Notes')
-                        </option>
-                      </optgroup>
-                    </select>
-                  </div>
-
-                  {/* ------------------------Essai de récupération des villes----------------------------------- */}
-                  <div className='form-group'>
-                    <label htmlFor='selection'></label>
-                    <select id='selection' className='form-control'>
-                      <option
-                        value=''
-                        title="appuyez plusieurs fois sur la première lettre de votre ville recherchée jusqu'à obtenir la bonne."
-                      >
-                        Villes et villages autour de Fresnoy-en-Thelle :
-                      </option>
-                      {lesVilles.map((ville) => (
-                        <option key={ville.id} value={ville.village_name}>
-                          {ville.village_name}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                </div>
-
-                <label
-                  htmlFor='exampleFormControlInput5'
-                  className='form-label'
-                >
-                  nombre de participants :
-                </label>
-                <input
-                  type='number'
-                  className='form-control'
-                  id='exampleFormControlInput6'
-                  placeholder='ex : 12'
-                  ref={number_of_participantsInput}
-                />
-                <label
-                  htmlFor='exampleFormControlInput6'
-                  className='form-label'
-                >
-                  date :
-                </label>
-                <input
-                  type='date'
-                  className='form-control'
-                  id='exampleFormControlInput7'
-                  ref={dateInput}
-                />
-
-                <div className='mb-3'>
                   <label
-                    htmlFor='exampleFormControlTextarea7'
+                    htmlFor='exampleFormControlInput6'
                     className='form-label'
                   >
-                    Notes
+                    date :
                   </label>
-                  <textarea
+                  <input
+                    type='date'
                     className='form-control'
-                    id='exampleFormControlTextarea1'
-                    rows={3}
-                  ></textarea>
+                    id='exampleFormControlInput7'
+                    ref={dateInput}
+                  />
+
+                  <div className='mb-3'>
+                    <label
+                      htmlFor='exampleFormControlTextarea7'
+                      className='form-label'
+                    >
+                      Notes
+                    </label>
+                    <textarea
+                      className='form-control'
+                      id='exampleFormControlTextarea1'
+                      rows={2}
+                      ref={questionInput}
+                    ></textarea>
+                  </div>
                 </div>
-              </div>
-              <div className='modal-footer'>
-                <button
-                  type='button'
-                  className='btn btn-danger'
-                  data-bs-dismiss='modal'
-                >
-                  Annuler
-                </button>
-                <button type='button' className='btn btn-success'>
-                  Enregistrer cette réservation
-                </button>
-              </div>
+                <div className='modal-footer'>
+                  <button
+                    type='button'
+                    className='btn btn-danger'
+                    data-bs-dismiss='modal'
+                  >
+                    Annuler
+                  </button>
+                  <button
+                    // type='button'
+                    className='btn btn-success'
+                    // onClick={EnregistrerResa}
+                  >
+                    Enregistrer cette réservation
+                  </button>
+                </div>
+              </form>
             </div>
           </div>
         </div>

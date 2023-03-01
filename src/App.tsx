@@ -21,7 +21,23 @@ function App() {
         <Navbar />
         <Routes>
           {/* Où qu'on aille, ... on aura le composant navbar */}
-          <Route path='/' element={<PageHome />} />
+          {/* Essai 28/02/2023 23H45 - Les propriétés du costumer semblent obligatoires si on lui passe l'interface */}
+          <Route
+            path='/'
+            element={
+              <PageHome
+                id={''}
+                name={''}
+                firstname={''}
+                adress={''}
+                postal_code={''}
+                city={''}
+                phone={''}
+                email={''}
+                password={''}
+              />
+            }
+          />
           <Route path='/PageInscription' element={<PageInscription />} />
           <Route path='/PageConnexion' element={<PageConnexion />} />
           <Route path='/PageInformations' element={<PageInformations />} />
