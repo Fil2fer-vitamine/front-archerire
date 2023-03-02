@@ -1,8 +1,9 @@
 import axios from 'axios';
-import { useEffect, useRef, useState } from 'react';
+import { FormEvent, useEffect, useRef, useState } from 'react';
 import Button from 'react-bootstrap/esm/Button';
 import Meteo from '../components/Meteo';
 import { Location } from '../components/ListeVilles';
+import { Animationsrequested } from './PageHome';
 
 /**
  * L'import { Location } nous permet de nous brancher à ce qui se fait pour les villes.
@@ -12,18 +13,6 @@ import { Location } from '../components/ListeVilles';
  */
 let villes: Location[] = [];
 
-interface Animationsrequested {
-  id: string;
-  date: string;
-  kind_of_animation: string;
-  number_of_participants: number;
-  for_who: string;
-  question: string;
-  decision_admin: boolean;
-  comments_admin: string;
-  negociation: string;
-}
-
 let animation: Animationsrequested[] = [];
 console.log("visualisation de 'animation' : ", animation);
 
@@ -31,22 +20,11 @@ console.log("visualisation de 'animation' : ", animation);
  * Utilisation de useState() pour afficher les valeurs dès l'apparition de la page.
  * Le useState est initialisé à tableau 'vide'
  */
+
+// COMPOSANT PRINCIPAL
 const PageReservation = () => {
-  const [lesVilles, setLesVilles] = useState<Location[]>([]);
-  const [lesAnimations, setLesAnimations] = useState<Animationsrequested[]>([]);
-  // useRef :
-  const dateInput = useRef<HTMLInputElement | null>(null);
-  const kind_of_animationInput = useRef<HTMLSelectElement>(null); // Se trouve sur la table animationrequested
-  const number_of_participantsInput = useRef<HTMLInputElement | null>(null);
-  // const inputRef = useRef() as MutableRefObject<HTMLInputElement>;
-  const for_whoRef = useRef<HTMLSelectElement>(null); // Se trouve sur la table animationrequested
-  const questionInput = useRef<HTMLTextAreaElement | null>(null);
-  const locationInput = useRef<HTMLSelectElement | null>(null);
-  /**
-   * Utilisation d'un UseEffect pour n'avoir qu'un get au moment du changement.
-   * Utilisation du client HTTP axios() entre le Frontend et le Backend pour lire
-   * ce qu'il y a dans la base de données
-   */
+  const [compteur, setCompteur] = useState<number>(0);
+
   useEffect(() => {
     axios.get(`http://localhost:8080/api/locations`).then((res) => {
       villes = res.data;
@@ -59,39 +37,99 @@ const PageReservation = () => {
        *  et de les afficher.
        */
     });
-  }, []);
 
-  useEffect(() => {
-    /**
-     * Pour l'enregistrement d'une animation :
-     * utilisation de useRef
-     */
     axios.get(`http://localhost:8080/api/animationsrequested`).then((resp) => {
       animation = resp.data;
       console.log('Les animations que je récupère : ', animation);
       setLesAnimations(animation);
     });
-  }, []);
+  }, [compteur]);
 
-  // axios.get(`http://localhost:8080/api/customer`).then(() => {});
-
-  const EnregistrerResa = (e: React.MouseEvent<HTMLFormElement>) => {
+  const EnregistrerResa = (e: FormEvent) => {
     e.preventDefault();
-    console.log('Les useRef date :', dateInput.current?.value);
-    console.log('Les useRef ville :', locationInput.current?.value);
+    // console.log('date récupérée : ', dateInput.current?.value);
+    // console.log("sorte d'animation : ", kind_of_animationInput.current?.value);
+    // console.log(
+    //   'number of participants : ',
+    //   number_of_participantsInput.current?.value
+    // );
+    // console.log('Pour qui ? : ', for_whoRef.current?.value);
+    // console.log('Notes : ', questionInput.current?.value);
+    // console.log('Endroit : ', { id: locationInput.current?.value });
 
-    console.log(
-      'Les useRef animation :',
-      kind_of_animationInput.current?.value
-    );
-    console.log('Les useRef for_who :', for_whoRef.current?.value);
-    console.log(
-      'Les useRef number_of_participants :',
-      number_of_participantsInput.current?.value
-    );
-    console.log('Les useRef question :', questionInput.current?.value);
+    axios
+      .post(`http://localhost:8080/api/animationsrequested`, {
+        date: dateInput.current?.value,
+        kind_of_animation: kind_of_animationInput.current?.value,
+        number_of_participants: number_of_participantsInput.current?.value,
+        for_who: for_whoRef.current?.value,
+        question: questionInput.current?.value,
+        location: { id: locationInput.current?.value },
+      })
+      .then((response) => {
+        console.log('Réponse de la requête create réservation : ', response);
+      });
   };
 
+  const handleAnimationSupp = (
+    animASupprimer: React.MouseEvent<HTMLButtonElement>
+  ) => {
+    console.log(animASupprimer.currentTarget.value, 'e dans handle anim');
+
+    axios
+      .delete(
+        `http://localhost:8080/api/animationsrequested/${animASupprimer.currentTarget.value}`
+      )
+      .then((response) => {
+        console.log('Réponse de la requête Delete réservation : ', response);
+        setCompteur(compteur + 1);
+      })
+      .catch((error) => {
+        console.log('erreur de la requête Delete réservation : ', error);
+      });
+  };
+
+  const handleAnimationUpdate = (
+    animUpdate: React.MouseEvent<HTMLButtonElement>
+  ) => {
+    console.log(animUpdate.currentTarget.value, 'e dans handle anim');
+
+    axios
+      .patch(
+        `http://localhost:8080/api/animationsrequested/${animUpdate.currentTarget.value}`,
+        {
+          // Les infos de la modal
+        }
+      )
+      .then((response) => {
+        console.log('Réponse de la requête update réservation : ', response);
+        setCompteur(compteur + 1);
+      })
+      .catch((error) => {
+        console.log('erreur de la requête update réservation : ', error);
+      });
+  };
+
+  // axios
+  //   .post(`http://localhost:8080/api/animationrequested`, {})
+  //   .then((response) => {
+  //     console.log(response);
+  //     console.log(response.data);
+  //   })
+  //   .catch((err) => {
+  //     console.log(err);
+  //   });
+  const [lesVilles, setLesVilles] = useState<Location[]>([]);
+  const [lesAnimations, setLesAnimations] = useState<Animationsrequested[]>([]);
+  // useRef :
+  const dateInput = useRef<HTMLInputElement | null>(null);
+  const kind_of_animationInput = useRef<HTMLSelectElement>(null); // Se trouve sur la table animationrequested
+  const number_of_participantsInput = useRef<HTMLInputElement | null>(null);
+  // const inputRef = useRef() as MutableRefObject<HTMLInputElement>;
+  const for_whoRef = useRef<HTMLSelectElement>(null); // Se trouve sur la table animationrequested
+  const questionInput = useRef<HTMLTextAreaElement | null>(null);
+  const locationInput = useRef<HTMLSelectElement | null>(null);
+  const nomSaisiParUtilisateur = useRef<HTMLInputElement | null>(null);
   return (
     <div>
       <Meteo />
@@ -145,6 +183,7 @@ const PageReservation = () => {
                       className='form-control'
                       id='exampleFormControlInput1'
                       placeholder='ex : ANDRE-DE-LA-TOUR'
+                      ref={nomSaisiParUtilisateur}
                     />
                     <div className='form-group'>
                       <label htmlFor='selection'>
@@ -245,7 +284,7 @@ const PageReservation = () => {
                           Villes et villages autour de Fresnoy-en-Thelle :
                         </option>
                         {lesVilles.map((ville) => (
-                          <option key={ville.id} value={ville.village_name}>
+                          <option key={ville.id} value={ville.id}>
                             {ville.village_name}
                           </option>
                         ))}
@@ -303,9 +342,10 @@ const PageReservation = () => {
                     Annuler
                   </button>
                   <button
-                    // type='button'
+                    type='button'
                     className='btn btn-success'
-                    // onClick={EnregistrerResa}
+                    onClick={EnregistrerResa}
+                    data-bs-dismiss='modal'
                   >
                     Enregistrer cette réservation
                   </button>
@@ -317,10 +357,35 @@ const PageReservation = () => {
         <div>
           {/* Mise des différentes animations enregistrées */}
           {lesAnimations.map((animation) => (
-            <div className='AfficheEvenement'>
-              <p>date : {animation.date}</p>
-              <p>nom : {animation.kind_of_animation}</p>
-              <p>number : {animation.number_of_participants}</p>
+            <div>
+              <div className='card'>
+                <div className='card-body'>
+                  <h5 className='card-title'>{animation.kind_of_animation}</h5>
+                  <p className='card-text'>
+                    Vous avez réservé l'animation{''}
+                    {animation.number_of_participants} en date du{''}
+                    {animation.date}.
+                  </p>
+                  <button
+                    value={animation.id}
+                    type='button'
+                    className='btn btn-primary'
+                    // onclick, on ouvre la modal
+                    onClick={}
+                  >
+                    Modifier
+                  </button>
+
+                  <button
+                    type='button'
+                    className='btn btn-danger'
+                    value={animation.id}
+                    onClick={handleAnimationSupp}
+                  >
+                    Supprimer
+                  </button>
+                </div>
+              </div>
             </div>
           ))}
         </div>

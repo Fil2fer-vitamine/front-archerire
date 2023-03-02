@@ -1,7 +1,6 @@
 import React from 'react';
 import './App.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import PageHome from './pages/PageHome';
 import LogoHaut from './pages/LogoHaut';
 import LogoBas from './pages/LogoBas';
 import Navbar from './components/Navbar';
@@ -12,6 +11,7 @@ import PagePhoto from './pages/PagePhoto';
 import PageListeReservations from './pages/PageListeReservations';
 import PageReservation from './pages/PageReservation';
 import Meteo from './components/Meteo';
+import PageHome from './pages/PageHome';
 
 function App() {
   return (
@@ -20,24 +20,7 @@ function App() {
         <LogoHaut />
         <Navbar />
         <Routes>
-          {/* Où qu'on aille, ... on aura le composant navbar */}
-          {/* Essai 28/02/2023 23H45 - Les propriétés du costumer semblent obligatoires si on lui passe l'interface */}
-          <Route
-            path='/'
-            element={
-              <PageHome
-                id={''}
-                name={''}
-                firstname={''}
-                adress={''}
-                postal_code={''}
-                city={''}
-                phone={''}
-                email={''}
-                password={''}
-              />
-            }
-          />
+          <Route path='/' element={<PageHome />} />
           <Route path='/PageInscription' element={<PageInscription />} />
           <Route path='/PageConnexion' element={<PageConnexion />} />
           <Route path='/PageInformations' element={<PageInformations />} />

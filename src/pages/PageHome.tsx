@@ -1,8 +1,6 @@
-import { useState } from 'react';
-import BoutonArchery from '../components/BoutonArchery';
-import CarouselHome from '../components/CarouselHome';
+import axios from 'axios';
 
-interface Customer {
+export interface Customer {
   id: string;
   name: string;
   firstname: string;
@@ -14,27 +12,22 @@ interface Customer {
   password: string;
 }
 
-// let customer: Customer[] = [];
+export interface Animationsrequested {
+  id: string;
+  date: string;
+  kind_of_animation: string;
+  number_of_participants: number;
+  for_who: string;
+  question: string;
+  decision_admin: boolean;
+  comments_admin: string;
+  negociation: string;
+}
 
-// const Bienvenue = () => {
-//   const [nomBienvenue, setBienvenue] = useState<Location[]>([]);
-//   const [lesAnimations, setLesAnimations] = useState<Animationsrequested[]>([]);
-
-function PageHome(customer:Customer) {
+const PageHome = () => {
   return (
     <div>
-      <div className='centrage'>
-        <div>
-          <div>
-            <div className='centrage'>              
-              <p>Bonjour et bienvenue {customer.firstname},</p>
-              {/* Essai 28/02/2022 23H40 - On pourra mettre le bonjour à l'utilisateur de par son nom dès que l'on aura fait l'identification côté Front-end */}
-            </div>
-            <CarouselHome />
-            <BoutonArchery />
-          </div>
-        </div>
-      </div>
+      <h1>PageHome</h1>
     </div>
   );
 };
