@@ -1,10 +1,12 @@
+// UTILISATION DES IMPORTS
 import axios from 'axios';
 import { FormEvent, useRef } from 'react';
 import { useNavigate } from 'react-router';
 import BoutonAnnuler from '../components/BoutonAnnuler';
 
-// Gestion de la page de connexion
+// COMPOSANT PRINCIPAL : Gestion de la page de connexion
 const Connexion = () => {
+  //UTILISATION DES HOOKS : useRef(), useNavigate() et useState()
   /**
    * Utilisation de useRef() pour créer une référence à deux éléments du DOM :
    * emailElement : pour le stockage de la saisie de l'email par l'utilisateur.
@@ -12,13 +14,13 @@ const Connexion = () => {
    */
   const emailElement = useRef<HTMLInputElement>(null);
   const passwordElement = useRef<HTMLInputElement>(null);
-
   /**
    * A la suite des saisies, on souhaite permettre une navigation à un moment donné :
    * variable navigate créée pour une utilisation quand login effectif
    */
   const navigate = useNavigate();
 
+  // UTILISATION DES FONCTIONS
   /**
    * Préparation du bouton handleSubmitForm afin de soumettre le formulaire.
    */
@@ -28,7 +30,10 @@ const Connexion = () => {
     console.log('---emailElement--- -->', emailElement.current?.value);
     console.log('---passwordElement--- -->', passwordElement.current?.value);
 
-    // ici on met une condition pour imposer les 2 valeurs du champs obligatoire, sinon on ne rentre pas dans notre axios
+    /**
+     * ici on met une condition pour imposer les 2 valeurs du champs obligatoire,
+     * sinon on ne rentre pas dans notre axios
+     */
     let Customer = {
       email: emailElement.current?.value,
       password: passwordElement.current?.value,
@@ -43,6 +48,7 @@ const Connexion = () => {
       alert('Le champs password doit impérativement être remplis');
     }
 
+    // UTILISATION DES AXIOS permettant de transmettre des informations entre le Frontend et le Backend.
     axios
       .post('http://localhost:8080/api/auth/login', Customer)
       /**
@@ -55,7 +61,7 @@ const Connexion = () => {
          * Alors on obtiendra une réponse...
          */
         console.log('réponse du post de login : ', response);
-        console.log('Customer : ',Customer);
+        console.log('Customer : ', Customer);
 
         const token = response.data.accessToken;
         console.log(response.data.accessToken);
@@ -72,6 +78,8 @@ const Connexion = () => {
         );
       });
   };
+
+  // UTILISATION DU RETURN pour l'Affichage
   return (
     <div>
       <div className='centrage'>
@@ -132,4 +140,5 @@ const Connexion = () => {
   );
 };
 
+// Utilisation de export default pour premettre l'exportation de ce composant pour un autre.
 export default Connexion;

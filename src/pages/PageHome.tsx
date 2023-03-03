@@ -1,4 +1,7 @@
+// UTILISATION DES IMPORTS 
 import axios from 'axios';
+
+// Déclaration des INTERFACES
 
 export interface Customer {
   id: string;
@@ -24,7 +27,16 @@ export interface Animationsrequested {
   negociation: string;
 }
 
+export interface Location {
+  id: number;
+  village_name: string;
+  distance_in_kilometers: string;
+}
+
+// COMPOSANT PRINCIPAL : Gestion de la page PageHome
 const PageHome = () => {
+
+  // UTILISATION DU RETURN pour l'Affichage
   return (
     <div>
       <h1>PageHome</h1>
@@ -32,4 +44,5 @@ const PageHome = () => {
   );
 };
 
+// Utilisation de export default pour premettre l'exportation de ce composant pour un autre.
 export default PageHome;

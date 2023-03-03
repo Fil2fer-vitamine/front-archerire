@@ -1,9 +1,10 @@
+// UTILISATION DES IMPORTS
 import { FormEvent, useRef } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import BoutonAnnuler from '../components/BoutonAnnuler';
 
-// Gestion de la page d'inscription
+// COMPOSANT PRINCIPAL : Gestion de la page d'inscription
 const PageInscription = () => {
   /**
    * Utilisation de useRef() pour créer une référence à neuf éléments du DOM :
@@ -116,6 +117,7 @@ const PageInscription = () => {
     }
   };
 
+  // UTILISATION DU RETURN pour l'Affichage
   return (
     <div>
       <div className='centrage'>

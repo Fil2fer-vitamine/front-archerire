@@ -8,9 +8,7 @@ import PageInscription from './pages/PageInscription';
 import PageConnexion from './pages/PageConnexion';
 import PageInformations from './pages/PageInformations';
 import PagePhoto from './pages/PagePhoto';
-import PageListeReservations from './pages/PageListeReservations';
 import PageReservation from './pages/PageReservation';
-import Meteo from './components/Meteo';
 import PageHome from './pages/PageHome';
 
 function App() {
@@ -25,10 +23,6 @@ function App() {
           <Route path='/PageConnexion' element={<PageConnexion />} />
           <Route path='/PageInformations' element={<PageInformations />} />
           <Route path='/PagePhotos' element={<PagePhoto />} />
-          {/* <Route
-            path='/PageListeReservations'
-            element={<PageListeReservations />}
-          /> */}
           <Route path='/Reservation' element={<PageReservation />} />
         </Routes>
         <LogoBas />
