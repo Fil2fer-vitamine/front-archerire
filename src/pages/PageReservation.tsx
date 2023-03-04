@@ -14,9 +14,16 @@ import { Animationsrequested } from './PageHome';
 
 // Déclaration des variables
 let villes: Location[] = [];
+console.log(
+  "visualisation de 'villes' - initialisation à tableau vide : ",
+  villes
+);
 
 let animation: Animationsrequested[] = [];
-console.log("visualisation de 'animation' : ", animation);
+console.log(
+  "visualisation de 'animation' - initialisation à tableau vide : ",
+  animation
+);
 
 /**
  * Utilisation de useState() pour afficher les valeurs dès l'apparition de la page.
@@ -29,8 +36,16 @@ const PageReservation = () => {
   const [compteur, setCompteur] = useState<number>(0);
   // Ce compteur sert à raffraichir le composant dès modification
 
+  /**
+   * Les useState() permettent un chargement des données dès que la page est présente
+   */
   const [lesVilles, setLesVilles] = useState<Location[]>([]);
   const [lesAnimations, setLesAnimations] = useState<Animationsrequested[]>([]);
+  console.log(
+    "visualisation de 'lesVilles' - affichage du tableau tel qu'il est dans la base de données : ",
+    lesVilles
+  );
+  console.log("visualisation de 'setLesVilles' : ", setLesVilles);
 
   // useRef :
   // Pour permettre la création :
@@ -42,8 +57,23 @@ const PageReservation = () => {
   // const inputRef = useRef() as MutableRefObject<HTMLInputElement>;
   const for_whoRefPourCreer = useRef<HTMLSelectElement>(null); // Se trouve sur la table animationrequested
   const questionInputPourCreer = useRef<HTMLTextAreaElement | null>(null);
-  const locationInputPourCreer = useRef<HTMLSelectElement | null>(null);
+  const village_namePourCreer = useRef<HTMLSelectElement | null>(null);
   const nomSaisiParUtilisateurPourCreer = useRef<HTMLInputElement | null>(null);
+
+  console.log('date récupérée : ', dateInputPourCreer.current?.value);
+  console.log(
+    "sorte d'animation : ",
+    kind_of_animationInputPourCreer.current?.value
+  );
+  console.log(
+    'number of participants : ',
+    number_of_participantsInputPourCreer.current?.value
+  );
+  console.log('Pour qui ? : ', for_whoRefPourCreer.current?.value);
+  console.log('Notes : ', questionInputPourCreer.current?.value);
+  console.log('Endroit : ', {
+    id: village_namePourCreer.current?.value,
+  });
 
   // Pour permettre la modification :
   const dateInputPourModifier = useRef<HTMLInputElement | null>(null);
@@ -52,10 +82,24 @@ const PageReservation = () => {
     useRef<HTMLInputElement | null>(null);
   const for_whoRefPourModifier = useRef<HTMLSelectElement>(null); // Se trouve sur la table animationrequested
   const questionInputPourModifier = useRef<HTMLTextAreaElement | null>(null);
-  const locationInputPourModifier = useRef<HTMLSelectElement | null>(null);
+  const village_namePourModifier = useRef<HTMLSelectElement | null>(null);
   const nomSaisiParUtilisateurPourModifier = useRef<HTMLInputElement | null>(
     null
   );
+  console.log('date récupérée : ', dateInputPourModifier.current?.value);
+  console.log(
+    "sorte d'animation : ",
+    kind_of_animationInputPourModifier.current?.value
+  );
+  console.log(
+    'number of participants : ',
+    number_of_participantsInputPourModifier.current?.value
+  );
+  console.log('Pour qui ? : ', for_whoRefPourModifier.current?.value);
+  console.log('Notes : ', questionInputPourModifier.current?.value);
+  console.log('Endroit : ', {
+    id: village_namePourModifier.current?.value,
+  });
 
   useEffect(() => {
     /**
@@ -67,11 +111,13 @@ const PageReservation = () => {
       console.log("Les villes que j'ai récupéré : ", villes);
       setLesVilles(villes);
       /**
-       * lesVilles : variable actuelle
+       * lesVilles : variable actuelle (pour le dropdown select des villes dans la modal)
        * setLesVilles : fonction qui permet de passer les villes une à une dans un autre tableau
        *  et de les afficher.
        */
     });
+
+    // --------------------------------------REQUETE AFFICHAGE DES ANIMATIONS------------------------------------------
 
     /**
      * useEffect() : Affichage des animations dès que la modale est présentée.
@@ -79,20 +125,20 @@ const PageReservation = () => {
      */
     axios.get(`http://localhost:8080/api/animationsrequested`).then((resp) => {
       animation = resp.data;
-      console.log('Les animations que je récupère : ', animation);
+      console.log(
+        'Les animations que je récupère quand je fais axios.get() : ',
+        animation
+      );
       setLesAnimations(animation);
     });
   }, [compteur]);
 
+  // ---------------------------------------Fonction Enregistrement réservation --------------------------------------
+
   const EnregistrerResa = (e: FormEvent) => {
     e.preventDefault();
-    // console.log('date récupérée : ', dateInput.current?.value);
-    // console.log("sorte d'animation : ", kind_of_animationInput.current?.value);
-    // console.log("number of participants : ", number_of_participantsInput.current?.value);
-    // console.log('Pour qui ? : ', for_whoRef.current?.value);
-    // console.log('Notes : ', questionInput.current?.value);
-    // console.log('Endroit : ', { id: locationInput.current?.value });
 
+    // --------------------------------------REQUETE CREATION----------------------------------------------------
     axios
       .post(`http://localhost:8080/api/animationsrequested`, {
         date: dateInputPourCreer.current?.value, // prise en compte de la date saisie
@@ -101,7 +147,7 @@ const PageReservation = () => {
           number_of_participantsInputPourCreer.current?.value,
         for_who: for_whoRefPourCreer.current?.value,
         question: questionInputPourCreer.current?.value,
-        location: { id: locationInputPourCreer.current?.value },
+        village_name: { id: village_namePourCreer.current?.value },
       })
       .then((response) => {
         console.log('Réponse de la requête create réservation : ', response);
@@ -111,7 +157,12 @@ const PageReservation = () => {
   const handleAnimationSupp = (
     animASupprimer: React.MouseEvent<HTMLButtonElement>
   ) => {
-    console.log(animASupprimer.currentTarget.value, 'e dans handle anim');
+    console.log(
+      'e dans handle anim pour supprimer : ',
+      animASupprimer.currentTarget.value
+    );
+
+    // --------------------------------------REQUETE SUPPRESSION----------------------------------------------------
 
     axios
       .delete(
@@ -127,22 +178,24 @@ const PageReservation = () => {
       });
   };
 
+  // --------------------------------------REQUETE MODIFICATION----------------------------------------------------
+
   const handleAnimationUpdate = (
     animUpdate: React.MouseEvent<HTMLButtonElement>
   ) => {
-    console.log(animUpdate.currentTarget.value, 'e dans handle anim');
+    console.log('e dans handle anim pour modifier : ', animUpdate);
 
     axios
       .patch(
-        `http://localhost:8080/api/animationsrequested/${animUpdate.currentTarget.value}`,
+        `http://localhost:8080/api/animationsrequested/${animUpdate.currentTarget.id}`,
         {
-          date: dateInputPourModifier.current?.value, // prise en compte de la date saisie
-          kind_of_animation: kind_of_animationInputPourModifier.current?.value,
+          date: dateInputPourModifier.current?.value, // Pour modification de la date
+          kind_of_animation: kind_of_animationInputPourModifier.current?.value, // Pour modification de la sorte d'animation
           number_of_participants:
-            number_of_participantsInputPourModifier.current?.value,
-          for_who: for_whoRefPourModifier.current?.value,
-          question: questionInputPourModifier.current?.value,
-          location: { id: locationInputPourModifier.current?.value },
+            number_of_participantsInputPourModifier.current?.value, // Pour modification du nombre de Participants
+          for_who: for_whoRefPourModifier.current?.value, // Pour modification de Pour qui ?
+          question: questionInputPourModifier.current?.value, // Pour modification de la Note
+          village_name: { id: village_namePourModifier.current?.value }, // Pour modification du lieu
         }
       )
       .then((response) => {
@@ -309,7 +362,7 @@ const PageReservation = () => {
                       <select
                         id='selection'
                         className='form-control'
-                        ref={locationInputPourCreer}
+                        ref={village_namePourCreer}
                       >
                         <option
                           value=''
@@ -409,15 +462,15 @@ const PageReservation = () => {
                     type='button'
                     className='btn btn-primary'
                     data-bs-toggle='modal'
-                    data-bs-target='#exampleModal2'
+                    data-bs-target='#exampleModalUpdate'
                   >
-                    Modifier
+                    Pour modifier
                   </button>
 
                   {/* ---------------------- Modal UPDATE ------------------------ */}
                   <div
                     className='modal fade'
-                    id='exampleModal2'
+                    id='exampleModalUpdate'
                     tabIndex={-1}
                     aria-labelledby='exampleModalLabel'
                     aria-hidden='true'
@@ -452,7 +505,7 @@ const PageReservation = () => {
                                 type='text'
                                 className='form-control'
                                 id='exampleFormControlInput1'
-                                placeholder='ex : ANDRE-DE-LA-TOUR'
+                                // placeholder={nomSaisiParUtilisateurPourCreer}
                                 ref={nomSaisiParUtilisateurPourModifier}
                               />
                               <div className='form-group'>
@@ -545,7 +598,7 @@ const PageReservation = () => {
                                 <select
                                   id='selection'
                                   className='form-control'
-                                  ref={locationInputPourModifier}
+                                  ref={village_namePourModifier}
                                 >
                                   <option
                                     value=''
@@ -615,10 +668,10 @@ const PageReservation = () => {
                             <button
                               type='button'
                               className='btn btn-success'
-                              onClick={EnregistrerResa}
+                              onClick={handleAnimationUpdate}
                               data-bs-dismiss='modal'
                             >
-                              Enregistrez les modification de votre reservation
+                              Enregistrez les modifications de votre reservation
                             </button>
                           </div>
                         </form>
