@@ -101,6 +101,9 @@ const PageReservation = () => {
     id: village_namePourModifier.current?.value,
   });
 
+  const [animationToUpdate, setAnimationToUpdate] =
+    useState<Animationsrequested>();
+
   useEffect(() => {
     /**
      * useEffect() : Affichage des villes dès que la page est présentée.
@@ -179,15 +182,63 @@ const PageReservation = () => {
   };
 
   // --------------------------------------REQUETE MODIFICATION----------------------------------------------------
+  const initialisationUpdateForm = (animation: Animationsrequested) => {
+    // mettre à jour la valeur du useState animationToUpdate (avec la valeur passée en paramètre)
+    // 1 ligne à compléter par Philippe --> La logique du onClick est placée ici
+    setAnimationToUpdate(animation);
+    // donner une valeur aux différents useRef du formulaire (initialiser les champs du formulaire)
+    if (for_whoRefPourModifier.current) {
+      for_whoRefPourModifier.current.value = animation.for_who;
+    }
+    // 5-6 autres blocs à compléter par Philippe (similaire à celui au dessus)
+    if (kind_of_animationInputPourModifier.current) {
+      kind_of_animationInputPourModifier.current.value =
+        animation.kind_of_animation; // MàJ de l'input/select avec la valeur contenu dans l'objet cliqué
+    }
+
+    if (village_namePourModifier.current) {
+      village_namePourModifier.current.value = animation.location.id.toString(); // MàJ de l'input/select avec la valeur contenu dans l'objet cliqué
+    }
+
+    if (number_of_participantsInputPourModifier.current) {
+      number_of_participantsInputPourModifier.current.value =
+        animation.number_of_participants.toString();
+      // MàJ de l'input/select avec la valeur contenu dans l'objet cliqué
+    }
+
+    if (dateInputPourModifier.current) {
+      dateInputPourModifier.current.value = animation.date;
+      // MàJ de l'input/select avec la valeur contenu dans l'objet cliqué
+    }
+
+    if (questionInputPourModifier.current) {
+      questionInputPourModifier.current.value = animation.question;
+      // MàJ de l'input/select avec la valeur contenu dans l'objet cliqué
+    }
+  };
 
   const handleAnimationUpdate = (
     animUpdate: React.MouseEvent<HTMLButtonElement>
   ) => {
-    console.log('e dans handle anim pour modifier : ', animUpdate);
+    console.log(
+      'dateInputPourModifier.current?.value ',
+      dateInputPourModifier.current?.value
+    );
+    console.log(
+      'kind_of_animation:',
+      kind_of_animationInputPourModifier.current?.value
+    ); // Pour modification de la sorte d'animation
+    console.log(
+      'number_of_participants:',
+      number_of_participantsInputPourModifier.current?.value
+    ); // Pour modification du nombre de Participants
+    console.log('for_who:', for_whoRefPourModifier.current?.value); // Pour modification de Pour qui ?
+    console.log('question:', questionInputPourModifier.current?.value); // Pour modification de la Note
+    console.log('village_name:', village_namePourModifier.current?.value); // Pour modification du lieu
 
     axios
       .patch(
-        `http://localhost:8080/api/animationsrequested/${animUpdate.currentTarget.id}`,
+        `http://localhost:8080/api/animationsrequested/${animationToUpdate?.id}`,
         {
           date: dateInputPourModifier.current?.value, // Pour modification de la date
           kind_of_animation: kind_of_animationInputPourModifier.current?.value, // Pour modification de la sorte d'animation
@@ -195,7 +246,7 @@ const PageReservation = () => {
             number_of_participantsInputPourModifier.current?.value, // Pour modification du nombre de Participants
           for_who: for_whoRefPourModifier.current?.value, // Pour modification de Pour qui ?
           question: questionInputPourModifier.current?.value, // Pour modification de la Note
-          village_name: { id: village_namePourModifier.current?.value }, // Pour modification du lieu
+          location: { id: village_namePourModifier.current?.value }, // Pour modification du lieu
         }
       )
       .then((response) => {
@@ -463,115 +514,131 @@ const PageReservation = () => {
                     className='btn btn-primary'
                     data-bs-toggle='modal'
                     data-bs-target='#exampleModalUpdate'
+                    data-id='coucou'
+                    onClick={() => {
+                      initialisationUpdateForm(animation);
+                    }}
                   >
                     Pour modifier
                   </button>
 
-                  {/* ---------------------- Modal UPDATE ------------------------ */}
-                  <div
-                    className='modal fade'
-                    id='exampleModalUpdate'
-                    tabIndex={-1}
-                    aria-labelledby='exampleModalLabel'
-                    aria-hidden='true'
+                  {/* ----------------------------------------------------------------- */}
+                  <button
+                    type='button'
+                    className='btn btn-danger'
+                    value={animation.id}
+                    onClick={handleAnimationSupp}
                   >
-                    <div className='modal-dialog'>
-                      <div className='modal-content'>
-                        <div className='modal-header'>
-                          <h1
-                            className='modal-title fs-5'
-                            id='exampleModalLabel'
-                          >
-                            Votre nouvelle réservation
-                          </h1>
-                          <button
-                            type='button'
-                            className='btn-close'
-                            data-bs-dismiss='modal'
-                            aria-label='Close'
-                          ></button>
-                        </div>
-                        {/* Debut form */}
-                        <form onSubmit={EnregistrerResa}>
-                          <div className='modal-body'>
-                            <div className='mb-3'>
-                              <label
-                                htmlFor='exampleFormControlInput1'
-                                className='form-label'
-                              >
-                                Veuillez nous indiquer votre nom :
-                              </label>
-                              <input
-                                type='text'
-                                className='form-control'
-                                id='exampleFormControlInput1'
-                                // placeholder={nomSaisiParUtilisateurPourCreer}
-                                ref={nomSaisiParUtilisateurPourModifier}
-                              />
-                              <div className='form-group'>
-                                <label htmlFor='selection'>
-                                  <select
-                                    id='selection'
-                                    className='form-control'
-                                    ref={for_whoRefPourModifier}
-                                  >
-                                    <option value=''>
-                                      Pour qui est faite la demande ?
-                                    </option>
-                                    <optgroup label='... vous même ?'>
-                                      <option value='un particulier.'>
-                                        un particulier.
-                                      </option>
-                                    </optgroup>
-                                    <optgroup label='... une entité ?'>
-                                      <option value='une entreprise.'>
-                                        une entreprise.
-                                      </option>
-                                      <option value='une association.'>
-                                        une association.
-                                      </option>
-                                      <option value='une communauté.'>
-                                        une communauté.
-                                      </option>
-                                    </optgroup>
-                                  </select>
-                                </label>
-                              </div>
-                              <div className='form-group'>
-                                <label id='kindOf' htmlFor='selection'></label>
-                                <select
-                                  id='kindOf'
-                                  className='form-control'
-                                  ref={kind_of_animationInputPourModifier}
-                                >
-                                  <option value=''>Animation demandée ?</option>
-                                  <optgroup label='Archery Battle'>
-                                    <option value='Archery Battle - 1 heure'>
-                                      Archery Battle - 1 heure
-                                    </option>
-                                    <option value='Archery Battle - 2 heures'>
-                                      Archery Battle - 2 heures
-                                    </option>
-                                    <option value='Archery Battle - 3 heures'>
-                                      Archery Battle - 3 heures
-                                    </option>
-                                  </optgroup>
-                                  <optgroup label='Les sumos'>
-                                    <option value='Les sumos - 1 heure'>
-                                      Les sumos - 1 heure
-                                    </option>
-                                    <option value='Les sumos - 2 heures'>
-                                      Les sumos - 2 heures
-                                    </option>
-                                    <option value='Les sumos - 3 heures'>
-                                      Les sumos - 3 heures
-                                    </option>
-                                  </optgroup>
-                                </select>
-                              </div>
+                    Supprimer
+                  </button>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+        {/* ---------------------- Modal UPDATE ------------------------ */}
+        <div
+          className='modal fade'
+          id='exampleModalUpdate'
+          tabIndex={-1}
+          aria-labelledby='exampleModalLabel'
+          aria-hidden='true'
+        >
+          <div className='modal-dialog'>
+            <div className='modal-content'>
+              <div className='modal-header'>
+                <h1 className='modal-title fs-5' id='exampleModalLabel'>
+                  Votre nouvelle réservation {animationToUpdate?.id}
+                </h1>
+                <button
+                  type='button'
+                  className='btn-close'
+                  data-bs-dismiss='modal'
+                  aria-label='Close'
+                ></button>
+              </div>
+              {/* Debut form */}
+              <form onSubmit={EnregistrerResa}>
+                <div className='modal-body'>
+                  <div className='mb-3'>
+                    <label
+                      htmlFor='exampleFormControlInput1'
+                      className='form-label'
+                    >
+                      Veuillez nous indiquer votre nom :
+                    </label>
+                    <input
+                      type='text'
+                      className='form-control'
+                      id='exampleFormControlInput1'
+                      // placeholder={nomSaisiParUtilisateurPourCreer}
+                      ref={nomSaisiParUtilisateurPourModifier}
+                    />
+                    <div className='form-group'>
+                      <label htmlFor='selection'>
+                        <select
+                          id='selection'
+                          className='form-control'
+                          ref={for_whoRefPourModifier}
+                          //defaultValue={animationToUpdate?.for_who}
+                        >
+                          <option value=''>
+                            Pour qui est faite la demande ?
+                          </option>
+                          <optgroup label='... vous même ?'>
+                            <option value='un particulier.'>
+                              un particulier.
+                            </option>
+                          </optgroup>
+                          <optgroup label='... une entité ?'>
+                            <option value='une entreprise.'>
+                              une entreprise.
+                            </option>
+                            <option value='une association.'>
+                              une association.
+                            </option>
+                            <option value='une communauté.'>
+                              une communauté.
+                            </option>
+                          </optgroup>
+                        </select>
+                      </label>
+                    </div>
+                    <div className='form-group'>
+                      <label id='kindOf' htmlFor='selection'></label>
+                      <select
+                        id='kindOf'
+                        className='form-control'
+                        ref={kind_of_animationInputPourModifier}
+                      >
+                        <option value=''>Animation demandée ?</option>
+                        <optgroup label='Archery Battle'>
+                          <option value='Archery Battle - 1 heure'>
+                            Archery Battle - 1 heure
+                          </option>
+                          <option value='Archery Battle - 2 heures'>
+                            Archery Battle - 2 heures
+                          </option>
+                          <option value='Archery Battle - 3 heures'>
+                            Archery Battle - 3 heures
+                          </option>
+                        </optgroup>
+                        <optgroup label='Les sumos'>
+                          <option value='Les sumos - 1 heure'>
+                            Les sumos - 1 heure
+                          </option>
+                          <option value='Les sumos - 2 heures'>
+                            Les sumos - 2 heures
+                          </option>
+                          <option value='Les sumos - 3 heures'>
+                            Les sumos - 3 heures
+                          </option>
+                        </optgroup>
+                      </select>
+                    </div>
 
-                              {/* Input de version 2 */}
-                              {/* <div className='form-group'>
+                    {/* Input de version 2 */}
+                    {/* <div className='form-group'>
                       <label htmlFor='selection'></label>
                       <select id='selection' className='form-control'>
                         <option value=''>Endroit à prendre en compte :</option>
@@ -592,105 +659,90 @@ const PageReservation = () => {
                       </select>
                     </div> */}
 
-                              {/* ------------------------Essai de récupération des villes----------------------------------- */}
-                              <div className='form-group'>
-                                <label htmlFor='selection'></label>
-                                <select
-                                  id='selection'
-                                  className='form-control'
-                                  ref={village_namePourModifier}
-                                >
-                                  <option
-                                    value=''
-                                    title="appuyez plusieurs fois sur la première lettre de votre ville recherchée jusqu'à obtenir la bonne."
-                                  >
-                                    Villes et villages autour de
-                                    Fresnoy-en-Thelle :
-                                  </option>
-                                  {lesVilles.map((ville) => (
-                                    <option key={ville.id} value={ville.id}>
-                                      {ville.village_name}
-                                    </option>
-                                  ))}
-                                </select>
-                              </div>
-                            </div>
-
-                            <label
-                              htmlFor='exampleFormControlInput5'
-                              className='form-label'
-                            >
-                              nombre de participants :
-                            </label>
-                            <input
-                              type='number'
-                              className='form-control'
-                              id='exampleFormControlInput6'
-                              placeholder='ex : 12'
-                              ref={number_of_participantsInputPourModifier}
-                            />
-                            <label
-                              htmlFor='exampleFormControlInput6'
-                              className='form-label'
-                            >
-                              date :
-                            </label>
-                            <input
-                              type='date'
-                              className='form-control'
-                              id='exampleFormControlInput7'
-                              ref={dateInputPourModifier}
-                            />
-
-                            <div className='mb-3'>
-                              <label
-                                htmlFor='exampleFormControlTextarea7'
-                                className='form-label'
-                              >
-                                Notes
-                              </label>
-                              <textarea
-                                className='form-control'
-                                id='exampleFormControlTextarea1'
-                                rows={2}
-                                ref={questionInputPourModifier}
-                              ></textarea>
-                            </div>
-                          </div>
-                          <div className='modal-footer'>
-                            <button
-                              type='button'
-                              className='btn btn-danger'
-                              data-bs-dismiss='modal'
-                            >
-                              Annuler
-                            </button>
-                            <button
-                              type='button'
-                              className='btn btn-success'
-                              onClick={handleAnimationUpdate}
-                              data-bs-dismiss='modal'
-                            >
-                              Enregistrez les modifications de votre reservation
-                            </button>
-                          </div>
-                        </form>
-                      </div>
+                    {/* ------------------------Essai de récupération des villes----------------------------------- */}
+                    <div className='form-group'>
+                      <label htmlFor='selection'></label>
+                      <select
+                        id='selection'
+                        className='form-control'
+                        ref={village_namePourModifier}
+                      >
+                        <option
+                          value=''
+                          title="appuyez plusieurs fois sur la première lettre de votre ville recherchée jusqu'à obtenir la bonne."
+                        >
+                          Villes et villages autour de Fresnoy-en-Thelle :
+                        </option>
+                        {lesVilles.map((ville) => (
+                          <option key={ville.id} value={ville.id}>
+                            {ville.village_name}
+                          </option>
+                        ))}
+                      </select>
                     </div>
                   </div>
-                  {/* ----------------------------------------------------------------- */}
+
+                  <label
+                    htmlFor='exampleFormControlInput5'
+                    className='form-label'
+                  >
+                    nombre de participants :
+                  </label>
+                  <input
+                    type='number'
+                    className='form-control'
+                    id='exampleFormControlInput6'
+                    placeholder='ex : 12'
+                    ref={number_of_participantsInputPourModifier}
+                  />
+                  <label
+                    htmlFor='exampleFormControlInput6'
+                    className='form-label'
+                  >
+                    date :
+                  </label>
+                  <input
+                    type='date'
+                    className='form-control'
+                    id='exampleFormControlInput7'
+                    ref={dateInputPourModifier}
+                  />
+
+                  <div className='mb-3'>
+                    <label
+                      htmlFor='exampleFormControlTextarea7'
+                      className='form-label'
+                    >
+                      Notes
+                    </label>
+                    <textarea
+                      className='form-control'
+                      id='exampleFormControlTextarea1'
+                      rows={2}
+                      ref={questionInputPourModifier}
+                    ></textarea>
+                  </div>
+                </div>
+                <div className='modal-footer'>
                   <button
                     type='button'
                     className='btn btn-danger'
-                    value={animation.id}
-                    onClick={handleAnimationSupp}
+                    data-bs-dismiss='modal'
                   >
-                    Supprimer
+                    Annuler
+                  </button>
+                  <button
+                    type='button'
+                    className='btn btn-success'
+                    onClick={handleAnimationUpdate}
+                    data-bs-dismiss='modal'
+                  >
+                    Enregistrez les modifications de votre reservation
                   </button>
                 </div>
-              </div>
+              </form>
             </div>
-          ))}
+          </div>
         </div>
       </div>
     </div>

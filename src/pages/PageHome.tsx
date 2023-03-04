@@ -25,6 +25,7 @@ export interface Animationsrequested {
   decision_admin: boolean;
   comments_admin: string;
   negociation: string;
+  location: Location;
 }
 
 export interface Location {
