@@ -14,16 +14,16 @@ import { Animationsrequested } from './PageHome';
 
 // Déclaration des variables
 let villes: Location[] = [];
-console.log(
-  "visualisation de 'villes' - initialisation à tableau vide : ",
-  villes
-);
+// console.log(
+//   "visualisation de 'villes' - initialisation à tableau vide : ",
+//   villes
+// );
 
 let animation: Animationsrequested[] = [];
-console.log(
-  "visualisation de 'animation' - initialisation à tableau vide : ",
-  animation
-);
+// console.log(
+//   "visualisation de 'animation' - initialisation à tableau vide : ",
+//   animation
+// );
 
 /**
  * Utilisation de useState() pour afficher les valeurs dès l'apparition de la page.
@@ -41,11 +41,11 @@ const PageReservation = () => {
    */
   const [lesVilles, setLesVilles] = useState<Location[]>([]);
   const [lesAnimations, setLesAnimations] = useState<Animationsrequested[]>([]);
-  console.log(
-    "visualisation de 'lesVilles' - affichage du tableau tel qu'il est dans la base de données : ",
-    lesVilles
-  );
-  console.log("visualisation de 'setLesVilles' : ", setLesVilles);
+  // console.log(
+  //   "visualisation de 'lesVilles' - affichage du tableau tel qu'il est dans la base de données : ",
+  //   lesVilles
+  // );
+  // console.log("visualisation de 'setLesVilles' : ", setLesVilles);
 
   // useRef :
   // Pour permettre la création :
@@ -60,20 +60,20 @@ const PageReservation = () => {
   const village_namePourCreer = useRef<HTMLSelectElement | null>(null);
   const nomSaisiParUtilisateurPourCreer = useRef<HTMLInputElement | null>(null);
 
-  console.log('date récupérée : ', dateInputPourCreer.current?.value);
-  console.log(
-    "sorte d'animation : ",
-    kind_of_animationInputPourCreer.current?.value
-  );
-  console.log(
-    'number of participants : ',
-    number_of_participantsInputPourCreer.current?.value
-  );
-  console.log('Pour qui ? : ', for_whoRefPourCreer.current?.value);
-  console.log('Notes : ', questionInputPourCreer.current?.value);
-  console.log('Endroit : ', {
-    id: village_namePourCreer.current?.value,
-  });
+  // console.log('date récupérée : ', dateInputPourCreer.current?.value);
+  // console.log(
+  //   "sorte d'animation : ",
+  //   kind_of_animationInputPourCreer.current?.value
+  // );
+  // console.log(
+  //   'number of participants : ',
+  //   number_of_participantsInputPourCreer.current?.value
+  // );
+  // console.log('Pour qui ? : ', for_whoRefPourCreer.current?.value);
+  // console.log('Notes : ', questionInputPourCreer.current?.value);
+  // console.log('Endroit : ', {
+  //   id: village_namePourCreer.current?.value,
+  // });
 
   // Pour permettre la modification :
   const dateInputPourModifier = useRef<HTMLInputElement | null>(null);
@@ -86,20 +86,20 @@ const PageReservation = () => {
   const nomSaisiParUtilisateurPourModifier = useRef<HTMLInputElement | null>(
     null
   );
-  console.log('date récupérée : ', dateInputPourModifier.current?.value);
-  console.log(
-    "sorte d'animation : ",
-    kind_of_animationInputPourModifier.current?.value
-  );
-  console.log(
-    'number of participants : ',
-    number_of_participantsInputPourModifier.current?.value
-  );
-  console.log('Pour qui ? : ', for_whoRefPourModifier.current?.value);
-  console.log('Notes : ', questionInputPourModifier.current?.value);
-  console.log('Endroit : ', {
-    id: village_namePourModifier.current?.value,
-  });
+  // console.log('date récupérée : ', dateInputPourModifier.current?.value);
+  // console.log(
+  //   "sorte d'animation : ",
+  //   kind_of_animationInputPourModifier.current?.value
+  // );
+  // console.log(
+  //   'number of participants : ',
+  //   number_of_participantsInputPourModifier.current?.value
+  // );
+  // console.log('Pour qui ? : ', for_whoRefPourModifier.current?.value);
+  // console.log('Notes : ', questionInputPourModifier.current?.value);
+  // console.log('Endroit : ', {
+  //   id: village_namePourModifier.current?.value,
+  // });
 
   const [animationToUpdate, setAnimationToUpdate] =
     useState<Animationsrequested>();
@@ -111,7 +111,7 @@ const PageReservation = () => {
      */
     axios.get(`http://localhost:8080/api/locations`).then((res) => {
       villes = res.data;
-      console.log("Les villes que j'ai récupéré : ", villes);
+      // console.log("Les villes que j'ai récupéré : ", villes);
       setLesVilles(villes);
       /**
        * lesVilles : variable actuelle (pour le dropdown select des villes dans la modal)
@@ -128,10 +128,10 @@ const PageReservation = () => {
      */
     axios.get(`http://localhost:8080/api/animationsrequested`).then((resp) => {
       animation = resp.data;
-      console.log(
-        'Les animations que je récupère quand je fais axios.get() : ',
-        animation
-      );
+      // console.log(
+      //   'Les animations que je récupère quand je fais axios.get() : ',
+      //   animation
+      // );
       setLesAnimations(animation);
     });
   }, [compteur]);
@@ -140,17 +140,27 @@ const PageReservation = () => {
 
   const EnregistrerResa = (e: FormEvent) => {
     e.preventDefault();
-
+    // alert('vous êtes au bon endroit !');
+    // console.log('mesdatas', dateInputPourCreer.current?.value);
+    // console.log('mesdatas', kind_of_animationInputPourCreer.current?.value);
+    // console.log(
+    //   'mesdatas',
+    //   typeof number_of_participantsInputPourCreer.current?.value
+    // );
+    // console.log('mesdatas', for_whoRefPourCreer.current?.value);
+    // console.log('mesdatas', questionInputPourCreer.current?.value);
+    // console.log('mesdatas', typeof village_namePourCreer.current?.value);
     // --------------------------------------REQUETE CREATION----------------------------------------------------
     axios
       .post(`http://localhost:8080/api/animationsrequested`, {
         date: dateInputPourCreer.current?.value, // prise en compte de la date saisie
         kind_of_animation: kind_of_animationInputPourCreer.current?.value,
-        number_of_participants:
-          number_of_participantsInputPourCreer.current?.value,
+        number_of_participants: Number(
+          number_of_participantsInputPourCreer.current?.value
+        ),
         for_who: for_whoRefPourCreer.current?.value,
         question: questionInputPourCreer.current?.value,
-        village_name: { id: village_namePourCreer.current?.value },
+        location: { id: Number(village_namePourCreer.current?.value) },
       })
       .then((response) => {
         console.log('Réponse de la requête create réservation : ', response);
@@ -184,8 +194,10 @@ const PageReservation = () => {
   // --------------------------------------REQUETE MODIFICATION----------------------------------------------------
   const initialisationUpdateForm = (animation: Animationsrequested) => {
     // mettre à jour la valeur du useState animationToUpdate (avec la valeur passée en paramètre)
+    // Initialise les champs du formulaires avec les valeurs de l'événement à modifier
     // 1 ligne à compléter par Philippe --> La logique du onClick est placée ici
     setAnimationToUpdate(animation);
+    console.log('qui y a t il la dedans ? ', animationToUpdate);
     // donner une valeur aux différents useRef du formulaire (initialiser les champs du formulaire)
     if (for_whoRefPourModifier.current) {
       for_whoRefPourModifier.current.value = animation.for_who;
@@ -220,21 +232,21 @@ const PageReservation = () => {
   const handleAnimationUpdate = (
     animUpdate: React.MouseEvent<HTMLButtonElement>
   ) => {
-    console.log(
-      'dateInputPourModifier.current?.value ',
-      dateInputPourModifier.current?.value
-    );
-    console.log(
-      'kind_of_animation:',
-      kind_of_animationInputPourModifier.current?.value
-    ); // Pour modification de la sorte d'animation
-    console.log(
-      'number_of_participants:',
-      number_of_participantsInputPourModifier.current?.value
-    ); // Pour modification du nombre de Participants
-    console.log('for_who:', for_whoRefPourModifier.current?.value); // Pour modification de Pour qui ?
-    console.log('question:', questionInputPourModifier.current?.value); // Pour modification de la Note
-    console.log('village_name:', village_namePourModifier.current?.value); // Pour modification du lieu
+    // console.log(
+    //   'dateInputPourModifier.current?.value ',
+    //   dateInputPourModifier.current?.value
+    // );
+    // console.log(
+    //   'kind_of_animation:',
+    //   kind_of_animationInputPourModifier.current?.value
+    // ); // Pour modification de la sorte d'animation
+    // console.log(
+    //   'number_of_participants:',
+    //   number_of_participantsInputPourModifier.current?.value
+    // ); // Pour modification du nombre de Participants
+    // console.log('for_who:', for_whoRefPourModifier.current?.value); // Pour modification de Pour qui ?
+    // console.log('question:', questionInputPourModifier.current?.value); // Pour modification de la Note
+    // console.log('village_name:', village_namePourModifier.current?.value); // Pour modification du lieu
 
     axios
       .patch(
@@ -280,7 +292,7 @@ const PageReservation = () => {
           type='button'
           className='btn btn-success'
           data-bs-toggle='modal'
-          data-bs-target='#exampleModal'
+          data-bs-target='#modalReservation'
         >
           Cliquez ici pour réserver une animation ...
         </Button>
@@ -288,7 +300,7 @@ const PageReservation = () => {
         {/* ___________________________________Modal Reservation d'une animation______________________________________ */}
         <div
           className='modal fade'
-          id='exampleModal'
+          id='modalReservation'
           tabIndex={-1}
           aria-labelledby='exampleModalLabel'
           aria-hidden='true'
@@ -307,7 +319,7 @@ const PageReservation = () => {
                 ></button>
               </div>
               {/* Debut form */}
-              <form onSubmit={EnregistrerResa}>
+              <form>
                 <div className='modal-body'>
                   <div className='mb-3'>
                     <label
@@ -558,7 +570,7 @@ const PageReservation = () => {
                 ></button>
               </div>
               {/* Debut form */}
-              <form onSubmit={EnregistrerResa}>
+              <form>
                 <div className='modal-body'>
                   <div className='mb-3'>
                     <label

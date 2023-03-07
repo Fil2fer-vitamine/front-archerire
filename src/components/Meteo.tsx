@@ -50,9 +50,9 @@ const App = () => {
         return response.json();
       })
       .then((data: MeteoApi) => {
-        console.log(data);
-        console.log('Temperature', data.current_condition.tmp);
-        console.log('Temps du jour', data.current_condition.condition);
+        // console.log(data);
+        // console.log('Temperature', data.current_condition.tmp);
+        // console.log('Temps du jour', data.current_condition.condition);
         setMeteoJour({ ...data });
       });
   }, []);
