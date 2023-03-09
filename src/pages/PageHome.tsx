@@ -1,5 +1,7 @@
 // UTILISATION DES IMPORTS 
 import axios from 'axios';
+import BoutonArchery from '../components/BoutonArchery';
+import CarouselHome from '../components/CarouselHome';
 
 // Déclaration des INTERFACES
 
@@ -40,7 +42,19 @@ const PageHome = () => {
   // UTILISATION DU RETURN pour l'Affichage
   return (
     <div>
-      <h1>PageHome</h1>
+      <div className='centrage'>
+        <div>
+          <div>
+            <div className='centrage'>
+              {/* <p>Bonjour et bienvenue {customer.firstname},</p> */}
+              <p>Bonjour et bienvenue,</p>
+              {/* Essai 28/02/2022 23H40 - On pourra mettre le bonjour à l'utilisateur de par son nom dès que l'on aura fait l'identification côté Front-end */}
+            </div>
+            <CarouselHome />
+            <BoutonArchery />
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

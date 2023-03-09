@@ -15,7 +15,7 @@ function App() {
   return (
     <div>
       <BrowserRouter>
-        <LogoHaut />
+        {/* <LogoHaut /> */}
         <Navbar />
         <Routes>
           <Route path='/' element={<PageHome />} />

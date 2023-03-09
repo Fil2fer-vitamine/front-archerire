@@ -2,7 +2,7 @@ import { NavLink } from 'react-router-dom';
 
 const Navbar = () => {
   return (
-    <div className='centrage'>
+    <div className='centrage ' style={{position:'sticky', top:'0', width:'100%', zIndex:'1', backgroundColor: 'white'}}>
       <nav className='navbar navbar-expand-lg bg-body-tertiary'>
         <div className='container-fluid'>
           <a className='navbar-brand' href='#'>
