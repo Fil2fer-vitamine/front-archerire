@@ -18,11 +18,11 @@ const PagePhoto = () => {
           <div className='info'>
             <h1 className='title'>Flèche</h1>
             <p className='description'>
-              Nos flèches comportent, en terme de protection, des embouts en
+              Nos flèches comportent, en termes de protection, des embouts en
               mousse.
               <br />
               Le corps de ces flèches sont en fibre de verre assurant une bonne
-              légèreté et résistance
+              légèreté et résistance.
             </p>
           </div>
         </div>
