@@ -10,6 +10,7 @@ import PageInformations from './pages/PageInformations';
 import PagePhoto from './pages/PagePhoto';
 import PageReservation from './pages/PageReservation';
 import PageHome from './pages/PageHome';
+import PageActualites from './pages/PageActualites';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
           <Route path='/PageInformations' element={<PageInformations />} />
           <Route path='/PagePhotos' element={<PagePhoto />} />
           <Route path='/Reservation' element={<PageReservation />} />
+          <Route path='/PageActualites' element={<PageActualites />} />
         </Routes>
         <LogoBas />
       </BrowserRouter>
