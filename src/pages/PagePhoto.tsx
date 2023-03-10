@@ -1,3 +1,6 @@
+import React from "react";
+import "./PagePhoto.css";
+
 const PagePhoto = () => {
   return (
     <div>
@@ -28,9 +31,8 @@ const PagePhoto = () => {
             <h1 className='title'>Masque</h1>
             <p className='description'>
               Tout comme les arcs que nous utilisons, nos masques sont
-              constitués en polymère garantissant une résistance à toute
-              épreuve.
-              <br />
+              constitués en polymère garantissant 
+              une résistance à toute épreuve.<br/>
               Ces masques sont désaffectés à chaque utilisation.
             </p>
           </div>

@@ -61,7 +61,7 @@ const App = () => {
     <div className='container text-center'>
       <div className='row'>
         <div className='App col d-flex'>
-          <div className='card' style={{ width: '20%' }}>
+          <div className='meteocard' style={{ width: '20%' }}>
             {/* <div className='card-body h-25'> */}
             <div className='card-title h-25'>
               Metéo actuelle à {meteoJour?.city_info.name}
@@ -89,7 +89,7 @@ const App = () => {
                 </div>
               </div> */}
               <div className='App col d-flex flex-column'>
-                <div className='card' style={{ width: '100%' }}>
+                <div className='meteocard' style={{ width: '100%' }}>
                   <div className='card-title h-25'>
                     Prévisions pour {meteoJour?.fcst_day_1.day_long} : {''}
                     {meteoJour?.fcst_day_1.condition}
@@ -97,7 +97,7 @@ const App = () => {
                 </div>
               </div>
               <div className='App col d-flex flex-column'>
-                <div className='card' style={{ width: '100%' }}>
+                <div className='meteocard' style={{ width: '100%' }}>
                   <div className='card-title h-25'>
                     Prévisions pour {meteoJour?.fcst_day_2.day_long} : {''}
                     {meteoJour?.fcst_day_2.condition}
@@ -105,7 +105,7 @@ const App = () => {
                 </div>
               </div>
               <div className='App col d-flex flex-column'>
-                <div className='card' style={{ width: '100%' }}>
+                <div className='meteocard' style={{ width: '100%' }}>
                   <div className='card-title h-25'>
                     Prévisions pour {meteoJour?.fcst_day_3.day_long} : {''}
                     {meteoJour?.fcst_day_3.condition}
@@ -113,7 +113,7 @@ const App = () => {
                 </div>
               </div>
               <div className='App col d-flex flex-column'>
-                <div className='card' style={{ width: '100%' }}>
+                <div className='meteocard' style={{ width: '100%' }}>
                   <div className='card-title h-25'>
                     Prévisions pour {meteoJour?.fcst_day_4.day_long} : {''}
                     {meteoJour?.fcst_day_4.condition}
