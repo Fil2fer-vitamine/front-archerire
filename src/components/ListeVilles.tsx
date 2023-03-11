@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import http from './Récupération';
+import http from './Récupération';            /* Besoin du fichier Récupération.tsx pour la liste des villes */
 
 /**
  * 1 - Nous allons récupérer ce type de données dans l'optique de les manipuler
