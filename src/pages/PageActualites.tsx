@@ -9,7 +9,7 @@ const PageActualites = () => {
               type='button'
               data-bs-toggle='collapse'
               data-bs-target='#collapseOne'
-              aria-expanded='true'
+              aria-expanded='false'
               aria-controls='collapseOne'
             >
               ***** Information : 22/03/2023 13H50 - Programmation d'une session

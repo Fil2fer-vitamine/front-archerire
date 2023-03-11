@@ -7,10 +7,28 @@
   box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.9);
   overflow: hidden;
   background-image: linear-gradient(
-      rgba(54, 54, 250, 0.3),
-      rgb(255, 255, 255, 0.5)
+      /* le gradient a été laissé tombé pour une netteté du texte */
+        rgba(255, 255, 255, 0.1),
+      rgba(255, 255, 255, 0.2)
     ),
-    url('/public/Assets/ImagePanoplie/un-arc.png');
+    url('/public/Assets/ImageLogo/logo.png');
+  background-size: cover;
+}
+
+.card0 {
+  border-radius: 24px;
+  margin: 30px auto;
+  width: 500px;
+  max-width: 100%;
+  min-height: 500px;
+  box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.9);
+  overflow: hidden;
+  background-image: linear-gradient(
+      /* le gradient a été laissé tombé pour une netteté du texte */
+        rgba(255, 255, 255, 0.1),
+      rgba(255, 255, 255, 0.2)
+    ),
+    url('/public/Assets/Photos/cool.png');
   background-size: cover;
 }
 
@@ -23,10 +41,11 @@
   box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.9);
   overflow: hidden;
   background-image: linear-gradient(
-      rgba(54, 54, 250, 0.3),
-      rgba(255, 255, 255, 0.5)
+      /* le gradient a été laissé tombé pour une netteté du texte */
+        rgba(255, 255, 255, 0.1),
+      rgba(255, 254, 254, 0.2)
     ),
-    url('/public/Assets/ImagePanoplie/fleches.png');
+    url('/public/Assets/Photos/activiteenfant.jpg');
   background-size: cover;
 }
 
@@ -39,10 +58,11 @@
   box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.9);
   overflow: hidden;
   background-image: linear-gradient(
-      rgba(54, 54, 250, 0.3),
-      rgba(255, 255, 255, 0.5)
+      /* le gradient a été laissé tombé pour une netteté du texte */
+        rgba(255, 255, 255, 0.1),
+      rgba(255, 255, 255, 0.2)
     ),
-    url('/public/Assets/ImagePanoplie/lemasque.png');
+    url('/public/Assets/Photos/lastrategie.png');
   background-size: cover;
 }
 
@@ -55,10 +75,45 @@
   box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.9);
   overflow: hidden;
   background-image: linear-gradient(
-      rgba(54, 54, 250, 0.3),
-      rgba(255, 255, 255, 0.5)
+      /* le gradient a été laissé tombé pour une netteté du texte */
+        rgba(255, 255, 255, 0.1),
+      rgba(255, 255, 255, 0.2)
     ),
-    url('/public/Assets/ImagePanoplie/bunker.png');
+    url('/public/Assets/Photos/supervision.png');
+  background-size: cover;
+}
+
+.card4 {
+  border-radius: 16px;
+  margin: 30px auto;
+  width: 500px;
+  max-width: 100%;
+  min-height: 500px;
+  box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.9);
+  overflow: hidden;
+  background-image: linear-gradient(
+      /* le gradient a été laissé tombé pour une netteté du texte */
+        rgba(255, 255, 255, 0.1),
+      rgba(255, 255, 255, 0.2)
+    ),
+    url('/public/Assets/Photos/tirsgroupes.png');
+  background-size: cover;
+}
+
+.card5 {
+  border-radius: 16px;
+  margin: 30px auto;
+  width: 500px;
+  max-width: 100%;
+  min-height: 500px;
+  box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.9);
+  overflow: hidden;
+  background-image: linear-gradient(
+      /* le gradient a été laissé tombé pour une netteté du texte */
+        rgba(255, 255, 255, 0.1),
+      rgba(255, 255, 255, 0.2)
+    ),
+    url('/public/Assets/Photos/partie.png');
   background-size: cover;
 }
 
@@ -81,8 +136,8 @@
   overflow: hidden;
   background-image: url('/public/Assets/ImageLogo/logo.png');
   background-size: cover; /* contain permet d'obtenir le logo à 100% */
-  opacity: 0.3;
-  transform: translateY(-60%) translateY(30px) translateZ(0);
+  opacity: 0.4;
+  transform: translateY(-32%) translateY(30px) translateZ(0); /* Ce paramètre a été modifié '-60%' de TRANSLATEY passe à -32' afin de permettre au logo de ne pas dépasser le cadre de la photo 6 et disparaitre sur les autres*/
   transition: transform 0.3s ease-out;
 }
 
@@ -107,6 +162,11 @@
   transform: translateY(0) translateZ(0);
 }
 
+.card0:hover .info,
+.card:hover .info:before {
+  transform: translateY(0) translateZ(0);
+}
+
 .card1:hover .info,
 .card1:hover .info:before {
   transform: translateY(0) translateZ(0);
@@ -119,6 +179,16 @@
 
 .card3:hover .info,
 .card3:hover .info:before {
+  transform: translateY(0) translateZ(0);
+}
+
+.card4:hover .info,
+.card4:hover .info:before {
+  transform: translateY(0) translateZ(0);
+}
+
+.card5:hover .info,
+.card4:hover .info:before {
   transform: translateY(0) translateZ(0);
 }
 
