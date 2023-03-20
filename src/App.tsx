@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import LogoHaut from './pages/LogoHaut';
+import LogoHaut from './pages/LogoHaut';    // Le logo Haut à gauche a été enlevé - incidence en responsive.
 import LogoBas from './pages/LogoBas';
 import Navbar from './components/Navbar';
 import PageInscription from './pages/PageInscription';

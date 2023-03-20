@@ -105,7 +105,7 @@ const PageInscription = () => {
            */
           console.log('Réponse : ', response);
           console.log('Data de la réponse : ', response.data);
-          alert('Inscription réussie! Passons à votre enregistrement...');
+          alert('Inscription réussie! Passons à votre connexion...');
           navigate('/PageConnexion');
         })
         .catch((err) => {

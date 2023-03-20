@@ -4,6 +4,7 @@ import Button from 'react-bootstrap/esm/Button';
 import Meteo from '../components/Meteo';
 import { Location } from '../components/ListeVilles';
 import { Animationsrequested } from './PageHome';
+import { Link } from 'react-router-dom';
 
 /**
  * L'import { Location } nous permet de nous brancher à ce qui se fait pour les villes.
@@ -34,6 +35,7 @@ let animation: Animationsrequested[] = [];
 const PageReservation = () => {
   //UTILISATION DES HOOKS : useRef(), useNavigate() et useState()
   const [compteur, setCompteur] = useState<number>(0);
+  const [token, setToken] = useState<string>();
   // Ce compteur sert à raffraichir le composant dès modification
 
   /**
@@ -126,15 +128,30 @@ const PageReservation = () => {
      * useEffect() : Affichage des animations dès que la modale est présentée.
      * On prend le verbe GET - prendre des données de la table 'Animationsrequested'
      */
-    axios.get(`http://localhost:8080/api/animationsrequested`).then((resp) => {
-      animation = resp.data;
-      // console.log(
-      //   'Les animations que je récupère quand je fais axios.get() : ',
-      //   animation
-      // );
-      setLesAnimations(animation);
-    });
+    axios
+      .get(`http://localhost:8080/api/animationsrequested`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+      })
+      .then((resp) => {
+        animation = resp.data;
+        // console.log(
+        //   'Les animations que je récupère quand je fais axios.get() : ',
+        //   animation
+        // );
+        setLesAnimations(animation);
+      });
   }, [compteur]);
+
+  useEffect(() => {
+    // Utilisation d'un useEffect() pour savoir si on a quelqu'un connecté - sondage du localStorage par rapport au token.
+    const tokenLocalStorage = localStorage.getItem('token');
+
+    if (tokenLocalStorage) {
+      setToken(tokenLocalStorage);
+    }
+  }, []);
 
   // ---------------------------------------Fonction Enregistrement réservation --------------------------------------
 
@@ -152,19 +169,28 @@ const PageReservation = () => {
     // console.log('mesdatas', typeof village_namePourCreer.current?.value);
     // --------------------------------------REQUETE CREATION----------------------------------------------------
     axios
-      .post(`http://localhost:8080/api/animationsrequested`, {
-        date: dateInputPourCreer.current?.value, // prise en compte de la date saisie
-        kind_of_animation: kind_of_animationInputPourCreer.current?.value,
-        number_of_participants: Number(
-          number_of_participantsInputPourCreer.current?.value
-        ),
-        for_who: for_whoRefPourCreer.current?.value,
-        question: questionInputPourCreer.current?.value,
-        location: { id: Number(village_namePourCreer.current?.value) },
-      })
+      .post(
+        `http://localhost:8080/api/animationsrequested`,
+        {
+          date: dateInputPourCreer.current?.value, // prise en compte de la date saisie
+          kind_of_animation: kind_of_animationInputPourCreer.current?.value,
+          number_of_participants: Number(
+            number_of_participantsInputPourCreer.current?.value
+          ),
+          for_who: for_whoRefPourCreer.current?.value,
+          question: questionInputPourCreer.current?.value,
+          location: { id: Number(village_namePourCreer.current?.value) },
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+          },
+        }
+      )
       .then((response) => {
         console.log('Réponse de la requête create réservation : ', response);
       });
+    setCompteur(compteur + 1);
   };
 
   const handleAnimationSupp = (
@@ -193,16 +219,13 @@ const PageReservation = () => {
 
   // --------------------------------------REQUETE MODIFICATION----------------------------------------------------
   const initialisationUpdateForm = (animation: Animationsrequested) => {
-    // mettre à jour la valeur du useState animationToUpdate (avec la valeur passée en paramètre)
-    // Initialise les champs du formulaires avec les valeurs de l'événement à modifier
-    // 1 ligne à compléter par Philippe --> La logique du onClick est placée ici
     setAnimationToUpdate(animation);
     console.log('qui y a t il la dedans ? ', animationToUpdate);
     // donner une valeur aux différents useRef du formulaire (initialiser les champs du formulaire)
     if (for_whoRefPourModifier.current) {
       for_whoRefPourModifier.current.value = animation.for_who;
     }
-    // 5-6 autres blocs à compléter par Philippe (similaire à celui au dessus)
+
     if (kind_of_animationInputPourModifier.current) {
       kind_of_animationInputPourModifier.current.value =
         animation.kind_of_animation; // MàJ de l'input/select avec la valeur contenu dans l'objet cliqué
@@ -285,17 +308,23 @@ const PageReservation = () => {
       <Meteo />
       <div className='container'>
         <h2>Page de réservation</h2>
-
-        {/* _____________________Trigger the modal with a button___________________________ */}
-
-        <Button
-          type='button'
-          className='btn btn-success'
-          data-bs-toggle='modal'
-          data-bs-target='#modalReservation'
-        >
-          Cliquez ici pour réserver une animation ...
-        </Button>
+        {/* _____________________Trigger the modal with a button________________Logique Token dans le localStorage ? ___________ */}
+        {token ? (
+          <Button
+            type='button'
+            className='btn btn-success'
+            data-bs-toggle='modal'
+            data-bs-target='#modalReservation'
+          >
+            Cliquez ici pour réserver une animation ...
+          </Button>
+        ) : (
+          <Link to={'/PageConnexion'}>
+            <Button type='button' className='btn btn-danger'>
+              Se connecter
+            </Button>
+          </Link>
+        )}
 
         {/* ___________________________________Modal Reservation d'une animation______________________________________ */}
         <div

@@ -1,5 +1,4 @@
 // UTILISATION DES IMPORTS 
-import axios from 'axios';
 import BoutonArchery from '../components/BoutonArchery';
 import CarouselHome from '../components/CarouselHome';
 

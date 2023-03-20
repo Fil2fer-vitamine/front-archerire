@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import BoutonArchery from '../components/BoutonArchery';
 import CarouselHome from '../components/CarouselHome';
 
