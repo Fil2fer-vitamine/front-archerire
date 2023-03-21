@@ -205,7 +205,12 @@ const PageReservation = () => {
 
     axios
       .delete(
-        `http://localhost:8080/api/animationsrequested/${animASupprimer.currentTarget.value}`
+        `http://localhost:8080/api/animationsrequested/${animASupprimer.currentTarget.value}`,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+          },
+        }
       )
       .then((response) => {
         console.log('Réponse de la requête Delete réservation : ', response);
@@ -255,21 +260,21 @@ const PageReservation = () => {
   const handleAnimationUpdate = (
     animUpdate: React.MouseEvent<HTMLButtonElement>
   ) => {
-    // console.log(
-    //   'dateInputPourModifier.current?.value ',
-    //   dateInputPourModifier.current?.value
-    // );
-    // console.log(
-    //   'kind_of_animation:',
-    //   kind_of_animationInputPourModifier.current?.value
-    // ); // Pour modification de la sorte d'animation
-    // console.log(
-    //   'number_of_participants:',
-    //   number_of_participantsInputPourModifier.current?.value
-    // ); // Pour modification du nombre de Participants
-    // console.log('for_who:', for_whoRefPourModifier.current?.value); // Pour modification de Pour qui ?
-    // console.log('question:', questionInputPourModifier.current?.value); // Pour modification de la Note
-    // console.log('village_name:', village_namePourModifier.current?.value); // Pour modification du lieu
+    console.log(
+      'dateInputPourModifier.current?.value ',
+      dateInputPourModifier.current?.value
+    );
+    console.log(
+      'kind_of_animation:',
+      kind_of_animationInputPourModifier.current?.value
+    ); // Pour modification de la sorte d'animation
+    console.log(
+      'number_of_participants:',
+      number_of_participantsInputPourModifier.current?.value
+    ); // Pour modification du nombre de Participants
+    console.log('for_who:', for_whoRefPourModifier.current?.value); // Pour modification de Pour qui ?
+    console.log('question:', questionInputPourModifier.current?.value); // Pour modification de la Note
+    console.log('village_name:', village_namePourModifier.current?.value); // Pour modification du lieu
 
     axios
       .patch(
@@ -277,11 +282,17 @@ const PageReservation = () => {
         {
           date: dateInputPourModifier.current?.value, // Pour modification de la date
           kind_of_animation: kind_of_animationInputPourModifier.current?.value, // Pour modification de la sorte d'animation
-          number_of_participants:
-            number_of_participantsInputPourModifier.current?.value, // Pour modification du nombre de Participants
-          for_who: for_whoRefPourModifier.current?.value, // Pour modification de Pour qui ?
-          question: questionInputPourModifier.current?.value, // Pour modification de la Note
-          location: { id: village_namePourModifier.current?.value }, // Pour modification du lieu
+          number_of_participants: Number(
+            number_of_participantsInputPourModifier.current?.value
+          ), // Pour modification du nombre de Participants
+          // for_who: for_whoRefPourModifier.current?.value, // Pour modification de Pour qui ?
+          // question: questionInputPourModifier.current?.value, // Pour modification de la Note
+          // location: { id: village_namePourModifier.current?.value }, // Pour modification du lieu
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+          },
         }
       )
       .then((response) => {
